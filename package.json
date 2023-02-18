@@ -47,5 +47,10 @@
       "yarn lint:fix",
       "yarn prettier:write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
