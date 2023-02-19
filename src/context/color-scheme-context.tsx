@@ -1,7 +1,7 @@
 import { ColorScheme } from '@mantine/core'
 import React from 'react'
 
-const ColorSchemeContext = React.createContext({})
+const ColorSchemeContext = React.createContext(undefined as unknown)
 ColorSchemeContext.displayName = 'ColorSchemeContext'
 
 export interface ColorSchemeProviderProps {
@@ -19,7 +19,7 @@ export function ColorSchemeProvider({ colorScheme, toggleColorScheme, children }
 export function useColorScheme() {
   const context = React.useContext(ColorSchemeContext)
   if (!context) {
-    throw new Error('useColorScheme must be used within the  ColorSchemeProvider')
+    throw new Error('useColorScheme must be used within the ColorSchemeProvider')
   }
   return context
 }
