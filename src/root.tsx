@@ -1,10 +1,15 @@
 import { ColorScheme, ColorSchemeProvider as ColorSchemeMantineProvider, MantineProvider } from '@mantine/core'
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './components/App'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from './context/color-scheme-context'
+
+// Create a client
+const queryClient = new QueryClient()
 
 function Root() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -23,13 +28,16 @@ function Root() {
 
   return (
     <React.StrictMode>
-      <ColorSchemeMantineProvider {...colorChemeProviderValues}>
-        <ColorSchemeProvider {...colorChemeProviderValues}>
-          <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-            <App />
-          </MantineProvider>
-        </ColorSchemeProvider>
-      </ColorSchemeMantineProvider>
+      <QueryClientProvider client={queryClient}>
+        <ColorSchemeMantineProvider {...colorChemeProviderValues}>
+          <ColorSchemeProvider {...colorChemeProviderValues}>
+            <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+              <App />
+            </MantineProvider>
+          </ColorSchemeProvider>
+        </ColorSchemeMantineProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </React.StrictMode>
   )
 }
