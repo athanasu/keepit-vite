@@ -16,6 +16,7 @@
     "@mantine/core": "^5.10.4",
     "@mantine/form": "^5.10.4",
     "@mantine/hooks": "^5.10.4",
+    "@prisma/client": "^4.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -39,6 +40,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
+    "prisma": "^4.10.1",
     "typescript": "*",
     "vite": "^4.1.0",
     "vite-plugin-eslint": "^1.8.1"
