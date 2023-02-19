@@ -1,11 +1,9 @@
-import { Aside as AsideMantine, MediaQuery, Text } from '@mantine/core'
+import { Aside as AsideMantine, Text } from '@mantine/core'
 
-export function Aside() {
+export function Aside({ opened }: { opened: boolean }) {
   return (
-    <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-      <AsideMantine p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-        <Text>Application sidebar</Text>
-      </AsideMantine>
-    </MediaQuery>
+    <AsideMantine p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
+      <Text>Application sidebar</Text>
+    </AsideMantine>
   )
 }

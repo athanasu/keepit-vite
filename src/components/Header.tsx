@@ -1,8 +1,11 @@
 import { ActionIcon, Burger, Header as MantineHeader, MediaQuery, useMantineTheme } from '@mantine/core'
+import { ColorSchemeProviderProps, useColorScheme } from '~/context/color-scheme-context'
 
-export function Header({ colorScheme, toggleColorScheme, opened, setOpened }: any) {
-  const dark = colorScheme === 'dark'
+export function Header({ opened, setOpened }: any) {
   const theme = useMantineTheme()
+  const { colorScheme, toggleColorScheme } = useColorScheme() as ColorSchemeProviderProps
+  const dark = colorScheme === 'dark'
+
   return (
     <MantineHeader height={{ base: 50, md: 70 }} p="md">
       <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
