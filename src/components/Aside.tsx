@@ -1,5 +1,6 @@
 import { Aside as AsideMantine, Text } from '@mantine/core'
 
+// TODO: Delete this
 export function Aside({ opened }: { opened: boolean }) {
   return (
     <AsideMantine p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>

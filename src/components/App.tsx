@@ -1,13 +1,13 @@
 import { AppShell } from '@mantine/core'
-import { useState } from 'react'
+// import { useState } from 'react'
 import '~/assets/css/app.css'
 
-import { Aside } from './Aside'
+// import { Aside } from './Aside'
 import { Header } from './Header'
 import { MainContent } from './MainContent'
 
 function App() {
-  const [opened, setOpened] = useState(false)
+  // const [opened, setOpened] = useState(false)
 
   return (
     <AppShell
@@ -15,11 +15,11 @@ function App() {
       styles={(theme) => ({
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
-      header={<Header setOpened={setOpened} />}
+      header={<Header setOpened={() => null} />}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       navbar={undefined}
-      aside={<Aside opened={opened} />}
+      aside={undefined}
     >
       <MainContent />
     </AppShell>
