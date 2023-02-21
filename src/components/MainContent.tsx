@@ -8,13 +8,13 @@ import { AddTranslationForm } from './AddTranslationForm'
 import { TranslationCard } from './TranslationCard'
 
 export function MainContent() {
-  const { data, isLoading, isFetching } = useQuery(['translations'], fetchTranslations)
+  const { data, isLoading } = useQuery(['translations'], fetchTranslations)
   const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
 
   return (
     <>
-      {isLoading || isFetching ? (
+      {isLoading ? (
         <Loader variant="dots" />
       ) : (
         <>

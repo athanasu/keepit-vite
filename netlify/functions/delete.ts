@@ -2,13 +2,14 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function handler(event, context) {
+export async function handler(event) {
+  const { id } = event.queryStringParameters
   try {
-    const translations = await prisma.keepit_Translation.findMany()
+    const translation = await prisma.keepit_Translation.delete({ where: { id: parseInt(id) } })
     return {
       statusCode: 200,
       header: 'Content-Type: application/json',
-      body: JSON.stringify(translations),
+      body: JSON.stringify(translation),
     }
   } catch (e) {
     return {
