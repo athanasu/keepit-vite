@@ -1,15 +1,14 @@
-import { Badge, Button, Drawer, Group, Loader, SimpleGrid, useMantineTheme } from '@mantine/core'
+import { Badge, Button, Group, Loader, Modal, SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchTranslations } from '~/api/translations'
 import { Translation } from '~/types/translation.types'
 
-import { AddTranslationForm } from './AddTranslationForm'
 import { TranslationCard } from './TranslationCard'
+import { TranslationForm } from './TranslationForm'
 
 export function MainContent() {
   const { data, isLoading } = useQuery(['translations'], fetchTranslations)
-  const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
 
   return (
@@ -38,15 +37,9 @@ export function MainContent() {
               return <TranslationCard item={item} key={item.id} />
             })}
           </SimpleGrid>
-          <Drawer
-            opened={opened}
-            onClose={() => setOpened(false)}
-            overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-            position="right"
-            size="xl"
-          >
-            <AddTranslationForm />
-          </Drawer>
+          <Modal opened={opened} onClose={() => setOpened(false)} title="New translation ✍️" closeOnClickOutside>
+            <TranslationForm setOpened={setOpened} />
+          </Modal>
         </>
       )}
     </>

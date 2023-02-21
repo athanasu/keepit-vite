@@ -3,11 +3,16 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export async function handler(event) {
-  const { from, to, notes } = JSON.parse(event.body)
+  const { id } = event.queryStringParameters
+  const { to, notes } = JSON.parse(event.body)
 
   try {
-    const translation = await prisma.keepit_Translation.create({
-      data: { from, to, notes },
+    const translation = await prisma.keepit_Translation.update({
+      where: { id: parseInt(id) },
+      data: {
+        to,
+        notes,
+      },
     })
     return {
       statusCode: 200,

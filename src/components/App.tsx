@@ -1,14 +1,10 @@
 import { AppShell } from '@mantine/core'
-// import { useState } from 'react'
 import '~/assets/css/app.css'
 
-// import { Aside } from './Aside'
 import { Header } from './Header'
 import { MainContent } from './MainContent'
 
 function App() {
-  // const [opened, setOpened] = useState(false)
-
   return (
     <AppShell
       padding="md"

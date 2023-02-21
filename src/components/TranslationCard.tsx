@@ -1,11 +1,14 @@
-import { Anchor, Badge, Button, Card, Divider, Flex, Group, Text, Title } from '@mantine/core'
+import { Anchor, Badge, Button, Card, Divider, Flex, Group, Modal, Text, Title } from '@mantine/core'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { removeTranslation } from '~/api/translations'
 import { Translation } from '~/types/translation.types'
 
+import { TranslationForm } from './TranslationForm'
+
 export function TranslationCard({ item }: { item: Translation }) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
+  const [showEditForm, setShowEditForm] = useState(false)
   const createdAt = new Date(item.createdAt)
   const queryClient = useQueryClient()
 
@@ -110,12 +113,45 @@ export function TranslationCard({ item }: { item: Translation }) {
       >
         <Text>{showDeleteConfirmation ? 'Click to confirm' : 'Delete'}</Text>
       </Button>
+      <Button
+        onClick={() => setShowEditForm(true)}
+        color="green"
+        variant="outline"
+        leftIcon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-pencil"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+            <path d="M13.5 6.5l4 4"></path>
+          </svg>
+        }
+      >
+        <Text>Edit</Text>
+      </Button>
       {item.notes && (
         <Text size="sm" color="dimmed">
           <Text c="dimmed">Notes: </Text>
           {item.notes}
         </Text>
       )}
+      <Modal
+        opened={showEditForm}
+        onClose={() => setShowEditForm(false)}
+        title="Edit translation ✍️"
+        closeOnClickOutside
+      >
+        <TranslationForm setOpened={setShowEditForm} item={item} />
+      </Modal>
     </Card>
   )
 }
