@@ -25,3 +25,7 @@ export async function updateTranslation(id: number, payload: any) {
     body: JSON.stringify(payload),
   }).then(async (res) => await res.json())
 }
+
+export async function searchTranslation(q: string) {
+  return await fetch(`/.netlify/functions/search?q=${q}`).then(async (res) => await res.json())
+}
