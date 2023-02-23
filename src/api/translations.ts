@@ -1,5 +1,7 @@
-export async function fetchTranslations() {
-  return await fetch('/.netlify/functions/read').then(async (res) => await res.json())
+export async function fetchTranslations(payload: any) {
+  const { page = 1, limit = 50 } = payload
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  return await fetch(`/.netlify/functions/read?page=${page}&limit=${limit}`).then(async (res) => await res.json())
 }
 
 export async function removeTranslation(id: number) {

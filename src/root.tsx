@@ -40,6 +40,7 @@ function Root() {
           <ColorSchemeProvider {...colorChemeProviderValues}>
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
               <SpotlightProvider
+                searchInputProps={{ autoComplete: 'off' }}
                 actions={searchResults}
                 searchIcon={undefined}
                 searchPlaceholder="Search..."

@@ -1,4 +1,4 @@
-import { Badge, Button, Group, Loader, Modal, SimpleGrid } from '@mantine/core'
+import { Badge, Button, Group, Loader, Modal, Pagination, SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchTranslations } from '~/api/translations'
@@ -8,21 +8,27 @@ import { TranslationCard } from './TranslationCard'
 import { TranslationForm } from './TranslationForm'
 
 export function MainContent() {
-  const { data, isLoading } = useQuery(['translations'], fetchTranslations)
   const [opened, setOpened] = useState(false)
+  const [page, setPage] = useState(1)
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ['translations', { page }],
+    queryFn: async () => await fetchTranslations({ page, limit: 50 }),
+    keepPreviousData: true,
+  })
 
   return (
     <>
-      {isLoading ? (
-        <Loader variant="dots" />
-      ) : (
+      {isLoading && <Loader variant="dots" />}
+
+      {isSuccess && (
         <>
           <Group position="center">
             <Button onClick={() => setOpened(true)}>Add New</Button>
           </Group>
           <Badge color="green" variant="light">
-            {data?.length}
+            {data.total}
           </Badge>
+          <Pagination total={data.totalPages} page={data.page} onChange={(e) => setPage(e)} />
           <SimpleGrid
             cols={5}
             spacing="lg"
@@ -33,7 +39,7 @@ export function MainContent() {
               { maxWidth: 450, cols: 1, spacing: 'sm' },
             ]}
           >
-            {data?.map((item: Translation) => {
+            {data.data.map((item: Translation) => {
               return <TranslationCard item={item} key={item.id} />
             })}
           </SimpleGrid>
