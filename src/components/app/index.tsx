@@ -1,4 +1,4 @@
-import { AppShell, Modal } from '@mantine/core'
+import { AppShell } from '@mantine/core'
 import { SpotlightAction, SpotlightProvider } from '@mantine/spotlight'
 import { useState } from 'react'
 import '~/assets/css/app.css'
@@ -6,7 +6,6 @@ import { useDebouncedSearchResults } from '~/hooks'
 
 import { Header } from '../header'
 import { MainContent } from '../main-content'
-import { TranslationForm } from '../translation/form'
 
 function App() {
   const [query, setQuery] = useState('')

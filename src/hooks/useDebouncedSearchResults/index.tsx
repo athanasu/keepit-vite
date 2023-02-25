@@ -1,4 +1,4 @@
-import { closeAllModals, openModal } from '@mantine/modals'
+import { openModal } from '@mantine/modals'
 import { closeSpotlight } from '@mantine/spotlight'
 import { useEffect } from 'react'
 import { searchTranslation } from '~/api/translations'
