@@ -1,9 +1,10 @@
 import { Box, Button, Group, TextInput, Textarea } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { closeAllModals } from '@mantine/modals'
 import { useQueryClient } from '@tanstack/react-query'
 import { addTranslation, updateTranslation } from '~/api/translations'
 
-export function TranslationForm({ setOpened, item = null }: any) {
+export function TranslationForm({ item = null }: any) {
   const queryClient = useQueryClient()
   const form = useForm({
     initialValues: {
@@ -23,8 +24,8 @@ export function TranslationForm({ setOpened, item = null }: any) {
       <form
         onSubmit={form.onSubmit(async (values) => {
           item ? await updateTranslation(item.id, values) : await addTranslation(values)
-          setOpened(false)
           await queryClient.invalidateQueries(['translations'])
+          closeAllModals()
         })}
       >
         <TextInput withAsterisk label="Original" placeholder="" {...form.getInputProps('from')} disabled={!!item} />

@@ -1,4 +1,5 @@
-import { Anchor, Badge, Button, Card, Divider, Flex, Group, Modal, Text, Title } from '@mantine/core'
+import { Anchor, Badge, Button, Card, Divider, Flex, Group, Text, Title } from '@mantine/core'
+import { openModal } from '@mantine/modals'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { removeTranslation } from '~/api/translations'
@@ -9,7 +10,6 @@ import { TranslationForm } from '../form'
 
 export function TranslationCard({ item }: { item: Translation }) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
-  const [showEditForm, setShowEditForm] = useState(false)
   const createdAt = new Date(item.createdAt)
   const queryClient = useQueryClient()
 
@@ -74,7 +74,17 @@ export function TranslationCard({ item }: { item: Translation }) {
       >
         <Text>{showDeleteConfirmation ? 'Click to confirm' : 'Delete'}</Text>
       </Button>
-      <Button onClick={() => setShowEditForm(true)} color="green" variant="outline" leftIcon={<EditIcon />}>
+      <Button
+        onClick={() =>
+          openModal({
+            title: 'Edit translation ✍️',
+            children: <TranslationForm item={item} />,
+          })
+        }
+        color="green"
+        variant="outline"
+        leftIcon={<EditIcon />}
+      >
         <Text>Edit</Text>
       </Button>
       {item.notes && (
@@ -83,14 +93,6 @@ export function TranslationCard({ item }: { item: Translation }) {
           {item.notes}
         </Text>
       )}
-      <Modal
-        opened={showEditForm}
-        onClose={() => setShowEditForm(false)}
-        title="Edit translation ✍️"
-        closeOnClickOutside
-      >
-        <TranslationForm setOpened={setShowEditForm} item={item} />
-      </Modal>
     </Card>
   )
 }

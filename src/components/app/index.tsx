@@ -10,42 +10,31 @@ import { TranslationForm } from '../translation/form'
 
 function App() {
   const [query, setQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<SpotlightAction[]>([])
-
-  const [showEditForm, setShowEditForm] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [searchActionResults, setSearchActionResults] = useState<SpotlightAction[]>([])
 
   const handleQueryChange = (query: string) => {
     setQuery(query)
   }
 
-  useDebouncedSearchResults({
-    query,
-    setSelectedItem,
-    setShowEditForm,
-    setSearchResults,
-  })
+  useDebouncedSearchResults({ query, setSearchActionResults })
 
   return (
     <SpotlightProvider
       searchInputProps={{ autoComplete: 'off' }}
-      actions={searchResults}
+      actions={searchActionResults}
       searchPlaceholder="Search for translations..."
       shortcut={['mod + K', 'mod + P']}
       nothingFoundMessage="Nothing found"
       cleanQueryOnClose
       closeOnActionTrigger
       onSpotlightOpen={() => {
-        setSearchResults([])
+        setSearchActionResults([])
       }}
       onQueryChange={handleQueryChange}
     >
       <AppShell header={<Header />}>
         <MainContent />
       </AppShell>
-      <Modal opened={showEditForm} onClose={() => setShowEditForm(false)} title="Search result ✍️" closeOnClickOutside>
-        <TranslationForm setOpened={setShowEditForm} item={selectedItem} />
-      </Modal>
     </SpotlightProvider>
   )
 }

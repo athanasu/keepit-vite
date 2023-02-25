@@ -1,4 +1,5 @@
-import { Badge, Button, Group, Loader, Modal, Pagination, SimpleGrid } from '@mantine/core'
+import { Badge, Button, Group, Loader, Pagination, SimpleGrid } from '@mantine/core'
+import { openModal } from '@mantine/modals'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchTranslations } from '~/api/translations'
@@ -10,7 +11,6 @@ import { TranslationCard } from '../translation/card'
 import { TranslationForm } from '../translation/form'
 
 export function MainContent() {
-  const [opened, setOpened] = useState(false)
   const [page, setPage] = useState(1)
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ['translations', { page }],
@@ -27,7 +27,14 @@ export function MainContent() {
       {isSuccess && (
         <>
           <Group position="center">
-            <Button onClick={() => setOpened(true)}>
+            <Button
+              onClick={() =>
+                openModal({
+                  title: 'New translation ✍️',
+                  children: <TranslationForm />,
+                })
+              }
+            >
               <PlusIcon />
               &nbsp; New
             </Button>
@@ -50,9 +57,6 @@ export function MainContent() {
               return <TranslationCard item={item} key={item.id} />
             })}
           </SimpleGrid>
-          <Modal opened={opened} onClose={() => setOpened(false)} title="New translation ✍️" closeOnClickOutside>
-            <TranslationForm setOpened={setOpened} />
-          </Modal>
         </>
       )}
     </>
