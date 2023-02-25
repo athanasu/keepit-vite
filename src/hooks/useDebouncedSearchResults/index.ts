@@ -1,6 +1,7 @@
 import { closeSpotlight } from '@mantine/spotlight'
 import { useEffect } from 'react'
 import { searchTranslation } from '~/api/translations'
+import { Translation } from '~/types/translation.types'
 import { ZodSearchTranslationData } from '~/zod-parsers'
 
 export const useDebouncedSearchResults = ({ query, setSelectedItem, setShowEditForm, setSearchResults }: any) => {
@@ -11,7 +12,7 @@ export const useDebouncedSearchResults = ({ query, setSelectedItem, setShowEditF
         const parsedResults = ZodSearchTranslationData.parse(results)
 
         if (parsedResults.length) {
-          const actionResults = parsedResults.map((result: any) => {
+          const actionResults = parsedResults.map((result: Translation) => {
             return {
               title: result.from,
               description: result.to,

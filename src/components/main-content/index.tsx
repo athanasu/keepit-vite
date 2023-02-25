@@ -2,6 +2,7 @@ import { Badge, Button, Group, Loader, Modal, Pagination, SimpleGrid } from '@ma
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchTranslations } from '~/api/translations'
+import { PlusIcon } from '~/components/icons'
 import { Translation } from '~/types/translation.types'
 import { ZodTranslationData } from '~/zod-parsers'
 
@@ -26,7 +27,10 @@ export function MainContent() {
       {isSuccess && (
         <>
           <Group position="center">
-            <Button onClick={() => setOpened(true)}>Add New</Button>
+            <Button onClick={() => setOpened(true)}>
+              <PlusIcon />
+              &nbsp; New
+            </Button>
           </Group>
           <Badge color="green" variant="light">
             {parsedData.total}
