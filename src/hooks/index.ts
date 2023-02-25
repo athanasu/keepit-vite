@@ -1,1 +1,1 @@
-export * from './useDebouncedSearchResults'
+export * from './useSearchResults'
