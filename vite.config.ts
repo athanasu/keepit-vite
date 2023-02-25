@@ -1,7 +1,8 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import eslintPlugin from 'vite-plugin-eslint'
 import path from 'path'
+import { defineConfig } from 'vite'
+import eslintPlugin from 'vite-plugin-eslint'
+import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,5 +11,5 @@ export default defineConfig({
       '~': path.resolve(__dirname, 'src'),
     },
   },
-  plugins: [react(), eslintPlugin()],
+  plugins: [react(), svgr(), eslintPlugin()],
 })
