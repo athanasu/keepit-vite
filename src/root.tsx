@@ -1,6 +1,7 @@
 import { ColorScheme, ColorSchemeProvider as ColorSchemeMantineProvider, MantineProvider } from '@mantine/core'
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
 import { ModalsProvider } from '@mantine/modals'
+import { NotificationsProvider } from '@mantine/notifications'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import '@total-typescript/ts-reset'
@@ -34,9 +35,11 @@ function Root() {
         <ColorSchemeMantineProvider {...colorChemeProviderValues}>
           <ColorSchemeProvider {...colorChemeProviderValues}>
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-              <ModalsProvider>
-                <App />
-              </ModalsProvider>
+              <NotificationsProvider position="top-center">
+                <ModalsProvider>
+                  <App />
+                </ModalsProvider>
+              </NotificationsProvider>
             </MantineProvider>
           </ColorSchemeProvider>
         </ColorSchemeMantineProvider>
