@@ -1,4 +1,6 @@
-export async function fetchTranslations(payload: any) {
+import { FetchPayload, Payload } from '~/types'
+
+export async function fetchTranslations(payload: FetchPayload) {
   const { page = 1, limit = '50' } = payload
   return await fetch(`/.netlify/functions/read?page=${page}&limit=${parseInt(limit)}`).then(
     async (res) => await res.json(),
@@ -9,7 +11,7 @@ export async function removeTranslation(id: number) {
   return await fetch(`/.netlify/functions/delete?id=${id}`).then(async (res) => await res.json())
 }
 
-export async function addTranslation(payload: any) {
+export async function addTranslation(payload: Payload) {
   return await fetch('/.netlify/functions/create', {
     method: 'POST',
     headers: {
@@ -19,7 +21,7 @@ export async function addTranslation(payload: any) {
   }).then(async (res) => await res.json())
 }
 
-export async function updateTranslation(id: number, payload: any) {
+export async function updateTranslation(id: number, payload: Payload) {
   return await fetch(`/.netlify/functions/update?id=${id}`, {
     method: 'PATCH',
     headers: {

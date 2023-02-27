@@ -1,45 +1,48 @@
 import { openModal } from '@mantine/modals'
 import { showNotification } from '@mantine/notifications'
-import { closeSpotlight } from '@mantine/spotlight'
-import { useEffect } from 'react'
+import { SpotlightAction, closeSpotlight } from '@mantine/spotlight'
+import { Dispatch, useEffect } from 'react'
 import { searchTranslation } from '~/api/translations'
 import { TranslationForm } from '~/components/translation/form'
-import { Translation } from '~/types/translation.types'
+import { ApiResponse, Translation } from '~/types'
 import { ZodSearchTranslationData } from '~/zod-parsers'
 
-export const useSearchResults = ({ query, setSearchActionResults }: any) => {
+interface SearchResultsProps {
+  query: string
+  setSearchActionResults: Dispatch<SpotlightAction[]>
+}
+
+export const useSearchResults = ({ query, setSearchActionResults }: SearchResultsProps) => {
   useEffect(() => {
     const search = async () => {
-      let results: any = []
       if (query.length > 3) {
         try {
-          results = await searchTranslation(query)
+          const { data, statusCode } = (await searchTranslation(query)) as ApiResponse
 
-          if (!Array.isArray(results) && results?.statusCode === 404) {
-            return
+          if (statusCode === 404) {
+            return // The Spotlight component will show the "Nothing found" message
           }
 
-          const parsedResults = ZodSearchTranslationData.parse(results)
+          const parsedResult = ZodSearchTranslationData.parse(data)
 
-          if (parsedResults.length) {
-            const actionResults = parsedResults.map((result: Translation) => {
-              return {
-                title: result.from,
-                description: result.to,
-                onTrigger: () => {
-                  openModal({
-                    title: 'Edit translation ✍️',
-                    children: <TranslationForm item={result} />,
-                  })
-                  closeSpotlight()
-                  setSearchActionResults([])
-                },
-              }
-            })
-            setSearchActionResults(actionResults)
-          }
+          // This transformation needs to be done in order to show results as actions in the Spotlight component
+          const actionResults = parsedResult.map((result: Translation) => {
+            return {
+              title: result.from,
+              description: result.to,
+              onTrigger: () => {
+                openModal({
+                  title: 'Edit translation ✍️',
+                  children: <TranslationForm item={result} />,
+                })
+                closeSpotlight()
+                setSearchActionResults([])
+              },
+            }
+          })
+
+          setSearchActionResults(actionResults)
         } catch (error) {
-          console.log(error)
           showNotification({
             title: 'Error',
             message: JSON.stringify(error),

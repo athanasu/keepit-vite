@@ -10,9 +10,12 @@ export async function handler(event) {
       data: { from, to, notes },
     })
     return {
-      statusCode: 200,
+      statusCode: 201,
       header: 'Content-Type: application/json',
-      body: JSON.stringify(translation),
+      body: JSON.stringify({
+        data: translation,
+        statusCode: 201,
+      }),
     }
   } catch (e) {
     return {

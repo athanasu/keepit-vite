@@ -1,6 +1,6 @@
 import { ColorScheme, ColorSchemeProvider as ColorSchemeMantineProvider, MantineProvider } from '@mantine/core'
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
-import { ModalsProvider } from '@mantine/modals'
+import { ModalsProvider, openModal } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -9,6 +9,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './components/app'
+import { TranslationForm } from './components/translation/form'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from './context/color-scheme-context'
 
 // Create a react query client
@@ -25,7 +26,18 @@ function Root() {
     setColorScheme(value ?? (colorScheme === 'dark' ? 'light' : 'dark'))
 
   // Use Ctrl+J or Cmd+J to toggle color scheme
-  useHotkeys([['mod+J', () => toggleColorScheme()]])
+  // Use Ctrl+N to create a new translation
+  useHotkeys([
+    ['mod+J', () => toggleColorScheme()],
+    [
+      'ctrl+N',
+      () =>
+        openModal({
+          title: 'New translation ✍️',
+          children: <TranslationForm />,
+        }),
+    ],
+  ])
 
   const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
 

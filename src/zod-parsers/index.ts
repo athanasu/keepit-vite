@@ -9,11 +9,12 @@ const TranslationSchema = z.object({
   updatedAt: z.string(),
 })
 
-export const ZodSearchTranslationData = z.array(TranslationSchema).default([])
+const TranslationSchemaData = z.array(TranslationSchema)
 
-export const ZodTranslationData = z
+export const ZodSearchTranslationData = TranslationSchemaData
+export const ZodReadTranslationData = z
   .object({
-    data: z.array(TranslationSchema),
+    data: TranslationSchemaData,
     total: z.number(),
     totalPages: z.number(),
     currentPage: z.string().transform((value) => parseInt(value, 10)),

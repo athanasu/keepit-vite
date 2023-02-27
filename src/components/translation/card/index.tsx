@@ -5,14 +5,14 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { removeTranslation } from '~/api/translations'
 import { DeleteIcon, EditIcon, InfoIcon } from '~/components/icons'
-import { Translation } from '~/types/translation.types'
+import { DeleteApiResponse, Translation } from '~/types'
 
 import { TranslationForm } from '../form'
 
 export function TranslationCard({ item }: { item: Translation }) {
+  const queryClient = useQueryClient()
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const createdAt = new Date(item.createdAt)
-  const queryClient = useQueryClient()
 
   const clickToConfirm = async () => {
     setShowDeleteConfirmation(true)
@@ -23,11 +23,12 @@ export function TranslationCard({ item }: { item: Translation }) {
 
   const remove = async () => {
     try {
-      await removeTranslation(item.id)
+      const { data } = (await removeTranslation(item.id)) as DeleteApiResponse
       await queryClient.invalidateQueries(['translations'])
+
       showNotification({
         title: 'Information',
-        message: 'Translation removed successfully',
+        message: `"${data.from}" translation removed successfully`,
       })
     } catch (error) {
       showNotification({

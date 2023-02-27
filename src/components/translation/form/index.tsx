@@ -4,16 +4,17 @@ import { closeAllModals } from '@mantine/modals'
 import { showNotification } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
 import { addTranslation, updateTranslation } from '~/api/translations'
+import { CreateApiResponse, Translation, UpdateApiResponse } from '~/types'
 
-export function TranslationForm({ item = null }: any) {
+export function TranslationForm({ item }: { item?: Translation }) {
   const queryClient = useQueryClient()
+
   const form = useForm({
     initialValues: {
       from: item?.from ?? '',
       to: item?.to ?? '',
       notes: item?.notes ?? '',
     },
-
     validate: {
       from: (value) => (value.length < 2 ? 'Must have at least 2 letters' : null),
       to: (value) => (value.length < 2 ? 'Must have at least 2 letters' : null),
@@ -22,12 +23,15 @@ export function TranslationForm({ item = null }: any) {
 
   const handleSubmit = form.onSubmit(async (values) => {
     try {
-      item ? await updateTranslation(item.id, values) : await addTranslation(values)
+      const { data } = item
+        ? ((await updateTranslation(item.id, values)) as UpdateApiResponse)
+        : ((await addTranslation(values)) as CreateApiResponse)
       await queryClient.invalidateQueries(['translations'])
+
       closeAllModals()
       showNotification({
         title: 'Information',
-        message: `Translation ${item ? 'updated' : 'stored'} successfully`,
+        message: `"${data.from}" ${item ? 'updated' : 'stored'} successfully`,
       })
     } catch (error) {
       showNotification({

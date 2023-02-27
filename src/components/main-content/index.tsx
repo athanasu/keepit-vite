@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchTranslations } from '~/api/translations'
 import { PlusIcon } from '~/components/icons'
-import { Translation } from '~/types/translation.types'
-import { ZodTranslationData } from '~/zod-parsers'
+import { Translation } from '~/types'
+import { ZodReadTranslationData } from '~/zod-parsers'
 
 import { TranslationCard } from '../translation/card'
 import { TranslationForm } from '../translation/form'
@@ -19,7 +19,7 @@ export function MainContent() {
     keepPreviousData: true,
   })
 
-  const parsedData = ZodTranslationData.parse(data)
+  const { total, totalPages, currentPage, data: translations } = ZodReadTranslationData.parse(data)
 
   return (
     <>
@@ -41,10 +41,10 @@ export function MainContent() {
             </Button>
           </Group>
           <Badge color="green" variant="light">
-            {parsedData.total}
+            {total}
           </Badge>
           <Group position="right">
-            <Pagination total={parsedData.totalPages} page={parsedData.currentPage} onChange={(e) => setPage(e)} />
+            <Pagination total={totalPages} page={currentPage} onChange={(e) => setPage(e)} />
             <Select
               value={limit}
               onChange={setLimit}
@@ -67,7 +67,7 @@ export function MainContent() {
               { maxWidth: 450, cols: 1, spacing: 'sm' },
             ]}
           >
-            {parsedData.data.map((item: Translation) => {
+            {translations.map((item: Translation) => {
               return <TranslationCard item={item} key={item.id} />
             })}
           </SimpleGrid>

@@ -1,7 +1,6 @@
 import { ActionIcon, Header as MantineHeader } from '@mantine/core'
+import { MoonIcon, SunIcon } from '~/components/icons'
 import { ColorSchemeProviderProps, useColorScheme } from '~/context/color-scheme-context'
-
-import { MoonIcon, SunIcon } from '../icons'
 
 export function Header() {
   const { colorScheme, toggleColorScheme } = useColorScheme() as ColorSchemeProviderProps

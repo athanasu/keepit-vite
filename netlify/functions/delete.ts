@@ -9,7 +9,10 @@ export async function handler(event) {
     return {
       statusCode: 200,
       header: 'Content-Type: application/json',
-      body: JSON.stringify(translation),
+      body: JSON.stringify({
+        data: translation,
+        statusCode: 200,
+      }),
     }
   } catch (e) {
     return {
