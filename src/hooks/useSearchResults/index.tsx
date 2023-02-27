@@ -28,7 +28,7 @@ export const useSearchResults = ({ query, setSearchActionResults }: any) => {
                 description: result.to,
                 onTrigger: () => {
                   openModal({
-                    title: 'Subscribe to newsletter',
+                    title: 'Edit translation ✍️',
                     children: <TranslationForm item={result} />,
                   })
                   closeSpotlight()
