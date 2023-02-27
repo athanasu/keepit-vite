@@ -14,6 +14,11 @@ export const useSearchResults = ({ query, setSearchActionResults }: any) => {
       if (query.length > 3) {
         try {
           results = await searchTranslation(query)
+
+          if (!Array.isArray(results) && results?.statusCode === 404) {
+            return
+          }
+
           const parsedResults = ZodSearchTranslationData.parse(results)
 
           if (parsedResults.length) {
@@ -34,6 +39,7 @@ export const useSearchResults = ({ query, setSearchActionResults }: any) => {
             setSearchActionResults(actionResults)
           }
         } catch (error) {
+          console.log(error)
           showNotification({
             title: 'Error',
             message: JSON.stringify(error),

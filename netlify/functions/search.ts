@@ -12,7 +12,7 @@ export async function handler(event) {
       return {
         statusCode: 404,
         header: 'Content-Type: application/json',
-        body: JSON.stringify({ message: 'Translation not found' }),
+        body: JSON.stringify({ message: 'Translation not found', statusCode: 404 }),
       }
     }
 
