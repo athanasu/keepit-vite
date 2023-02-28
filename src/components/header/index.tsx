@@ -1,8 +1,8 @@
 import { ActionIcon, Button, Flex, Group, Header as MantineHeader, MediaQuery } from '@mantine/core'
 import { openModal } from '@mantine/modals'
-import { Shortcuts } from 'components/shortcuts'
-import { TranslationForm } from 'components/translation/form'
 import { MoonIcon, PlusIcon, SunIcon } from '~/components/icons'
+import { Shortcuts } from '~/components/shortcuts'
+import { TranslationForm } from '~/components/translation/form'
 import { ColorSchemeProviderProps, useColorScheme } from '~/context/color-scheme-context'
 
 export function Header() {

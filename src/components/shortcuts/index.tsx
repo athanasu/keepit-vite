@@ -1,6 +1,5 @@
-import { ActionIcon, Badge, Button, Flex, HoverCard, Kbd } from '@mantine/core'
-
-import { InfoIcon } from '../icons'
+import { ActionIcon, Badge, HoverCard, Kbd } from '@mantine/core'
+import { InfoIcon } from '~/components/icons'
 
 export function Shortcuts() {
   return (
