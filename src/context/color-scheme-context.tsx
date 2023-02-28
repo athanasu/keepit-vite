@@ -6,7 +6,7 @@ ColorSchemeContext.displayName = 'ColorSchemeContext'
 
 export interface ColorSchemeProviderProps {
   colorScheme: ColorScheme
-  toggleColorScheme: (val?: string | ((prevState: string) => string)) => void
+  toggleColorScheme: (value?: ColorScheme) => void
   children?: React.ReactNode
 }
 
