@@ -1,13 +1,12 @@
-import { Anchor, Badge, Button, Card, Divider, Flex, Group, Text, Title } from '@mantine/core'
+import { Anchor, Badge, Button, Card, Code, Divider, Flex, Group, Text, Title } from '@mantine/core'
 import { openModal } from '@mantine/modals'
 import { showNotification } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { removeTranslation } from '~/api/translations'
 import { DeleteIcon, EditIcon, InfoIcon } from '~/components/icons'
+import { TranslationForm } from '~/components/translation/form'
 import { DeleteApiResponse, Translation } from '~/types'
-
-import { TranslationForm } from '../form'
 
 export function TranslationCard({ item }: { item: Translation }) {
   const queryClient = useQueryClient()
@@ -41,12 +40,12 @@ export function TranslationCard({ item }: { item: Translation }) {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder key={item.id}>
       <Group position="apart" mt="md" mb="xs">
-        <Badge color="pink" variant="light">
-          {item.id}
+        <Badge variant="outline">{item.id}</Badge>
+        <Badge color="red" variant="light">
+          <Flex direction={{ base: 'column', sm: 'row' }} gap={{ base: 'sm', sm: 'lg' }} justify={{ sm: 'center' }}>
+            {createdAt.getDate()}/ {createdAt.getMonth() + 1} / {createdAt.getFullYear()}
+          </Flex>
         </Badge>
-        <Flex direction={{ base: 'column', sm: 'row' }} gap={{ base: 'sm', sm: 'lg' }} justify={{ sm: 'center' }}>
-          {createdAt.getDate()}/ {createdAt.getMonth() + 1} / {createdAt.getFullYear()}
-        </Flex>
       </Group>
 
       <Flex direction={{ base: 'column', sm: 'row' }} gap={{ base: 'sm', sm: 'lg' }} justify="space-evenly">
@@ -75,33 +74,37 @@ export function TranslationCard({ item }: { item: Translation }) {
         }}
       />
 
-      <Button
-        onClick={showDeleteConfirmation ? remove : clickToConfirm}
-        color={showDeleteConfirmation ? 'yellow' : 'blue'}
-        variant="outline"
-        leftIcon={showDeleteConfirmation ? <InfoIcon /> : <DeleteIcon />}
-      >
-        <Text>{showDeleteConfirmation ? 'Click to confirm' : 'Delete'}</Text>
-      </Button>
-      <Button
-        onClick={() =>
-          openModal({
-            title: 'Edit translation ✍️',
-            children: <TranslationForm item={item} />,
-          })
-        }
-        color="green"
-        variant="outline"
-        leftIcon={<EditIcon />}
-      >
-        <Text>Edit</Text>
-      </Button>
-      {item.notes && (
-        <Text size="sm" color="dimmed">
-          <Text c="dimmed">Notes: </Text>
-          {item.notes}
-        </Text>
-      )}
+      <Code block style={{ marginBottom: 20 }}>
+        <Text c="dimmed">Notes: </Text>
+        <br />
+        {item.notes || '...'}
+      </Code>
+
+      <Flex direction={{ base: 'column', sm: 'row' }} gap={{ base: 'sm', sm: 'lg' }} justify="space-between">
+        <Button
+          onClick={showDeleteConfirmation ? remove : clickToConfirm}
+          color={showDeleteConfirmation ? 'yellow' : 'blue'}
+          variant="outline"
+          leftIcon={showDeleteConfirmation ? <InfoIcon /> : <DeleteIcon />}
+          size="xs"
+        >
+          <Text>{showDeleteConfirmation ? 'Click to confirm' : 'Delete'}</Text>
+        </Button>
+        <Button
+          onClick={() =>
+            openModal({
+              title: 'Edit translation ✍️',
+              children: <TranslationForm item={item} />,
+            })
+          }
+          color="green"
+          variant="outline"
+          leftIcon={<EditIcon />}
+          size="xs"
+        >
+          <Text>Edit</Text>
+        </Button>
+      </Flex>
     </Card>
   )
 }

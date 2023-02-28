@@ -1,14 +1,10 @@
-import { Badge, Button, Group, Loader, Pagination, Select, SimpleGrid } from '@mantine/core'
-import { openModal } from '@mantine/modals'
+import { Badge, Box, Center, Flex, Loader, MediaQuery, Pagination, Select, SimpleGrid } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchTranslations } from '~/api/translations'
-import { PlusIcon } from '~/components/icons'
+import { TranslationCard } from '~/components/translation/card'
 import { Translation } from '~/types'
 import { ZodReadTranslationData } from '~/zod-parsers'
-
-import { TranslationCard } from '../translation/card'
-import { TranslationForm } from '../translation/form'
 
 export function MainContent() {
   const [page, setPage] = useState(1)
@@ -21,43 +17,53 @@ export function MainContent() {
 
   const { total, totalPages, currentPage, data: translations } = ZodReadTranslationData.parse(data)
 
+  const TopArea = () => (
+    <MediaQuery query="(max-width: 750px)" styles={{ flexDirection: 'column', alignItems: 'center' }}>
+      <Flex justify="space-between" align="center">
+        <MediaQuery query="(max-width: 750px)" styles={{ marginBottom: 20 }}>
+          <Badge color="green" variant="light">
+            Total: {total}
+          </Badge>
+        </MediaQuery>
+        <Box style={{ display: 'inline-flex' }}>
+          <Pagination
+            total={totalPages}
+            page={currentPage}
+            onChange={(e) => setPage(e)}
+            withEdges
+            style={{ marginRight: 20 }}
+          />
+          <Select
+            size="sm"
+            style={{ width: 80 }}
+            value={limit}
+            onChange={setLimit}
+            data={[
+              { value: '25', label: '25' },
+              { value: '50', label: '50' },
+              { value: '100', label: '100' },
+              { value: '150', label: '150' },
+              { value: '200', label: '200' },
+            ]}
+          />
+        </Box>
+      </Flex>
+    </MediaQuery>
+  )
+
   return (
     <>
-      {isLoading && <Loader variant="dots" />}
+      {isLoading && (
+        <Center style={{ height: '100%' }}>
+          <Loader variant="dots" size={100} style={{ height: '100%' }} />
+        </Center>
+      )}
 
       {isSuccess && (
         <>
-          <Group position="center">
-            <Button
-              onClick={() =>
-                openModal({
-                  title: 'New translation ✍️',
-                  children: <TranslationForm />,
-                })
-              }
-            >
-              <PlusIcon />
-              &nbsp; New
-            </Button>
-          </Group>
-          <Badge color="green" variant="light">
-            {total}
-          </Badge>
-          <Group position="right">
-            <Pagination total={totalPages} page={currentPage} onChange={(e) => setPage(e)} />
-            <Select
-              value={limit}
-              onChange={setLimit}
-              data={[
-                { value: '25', label: '25' },
-                { value: '50', label: '50' },
-                { value: '100', label: '100' },
-                { value: '150', label: '150' },
-                { value: '200', label: '200' },
-              ]}
-            />
-          </Group>
+          <TopArea />
           <SimpleGrid
+            style={{ marginTop: 20, marginBottom: 20 }}
             cols={5}
             spacing="lg"
             breakpoints={[

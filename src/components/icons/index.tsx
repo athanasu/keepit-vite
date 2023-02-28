@@ -2,8 +2,8 @@ export const InfoIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-info-circle"
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     strokeWidth="2"
     stroke="currentColor"
@@ -22,8 +22,8 @@ export const DeleteIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-trash"
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     strokeWidth="2"
     stroke="currentColor"
@@ -44,8 +44,8 @@ export const EditIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-pencil"
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     strokeWidth="2"
     stroke="currentColor"
@@ -102,8 +102,8 @@ export const PlusIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-circle-plus"
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     strokeWidth="2"
     stroke="currentColor"
