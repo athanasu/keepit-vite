@@ -87,6 +87,7 @@ export function TranslationCard({ item }: { item: Translation }) {
           variant="outline"
           leftIcon={showDeleteConfirmation ? <InfoIcon /> : <DeleteIcon />}
           size="xs"
+          style={{ fontSize: '0.8rem' }}
         >
           <Text>{showDeleteConfirmation ? 'Click to confirm' : 'Delete'}</Text>
         </Button>
@@ -101,6 +102,7 @@ export function TranslationCard({ item }: { item: Translation }) {
           variant="outline"
           leftIcon={<EditIcon />}
           size="xs"
+          style={{ fontSize: '0.8rem' }}
         >
           <Text>Edit</Text>
         </Button>

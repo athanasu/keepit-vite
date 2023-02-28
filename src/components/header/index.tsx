@@ -16,7 +16,7 @@ export function Header() {
           <Group position="center">
             <Button
               size="xs"
-              style={{ fontSize: '0.9rem', lineHeight: 'normal' }}
+              style={{ fontSize: '1rem', lineHeight: 'normal' }}
               onClick={() =>
                 openModal({
                   title: 'New translation ✍️',
