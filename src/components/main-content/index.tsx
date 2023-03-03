@@ -9,7 +9,7 @@ import { ZodReadTranslationData } from '~/zod-parsers'
 export function MainContent() {
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState('50')
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data, isLoading, isSuccess, isFetching } = useQuery({
     queryKey: ['translations', { page, limit }],
     queryFn: async () => await fetchTranslations({ page, limit }),
     keepPreviousData: true,
@@ -26,6 +26,7 @@ export function MainContent() {
           </Badge>
         </MediaQuery>
         <Box style={{ display: 'inline-flex' }}>
+          {isFetching && <Loader size="sm" style={{ marginRight: 10 }} />}
           <Pagination
             total={totalPages}
             page={currentPage}
@@ -42,8 +43,6 @@ export function MainContent() {
               { value: '25', label: '25' },
               { value: '50', label: '50' },
               { value: '100', label: '100' },
-              { value: '150', label: '150' },
-              { value: '200', label: '200' },
             ]}
           />
         </Box>

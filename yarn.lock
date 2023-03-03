@@ -687,13 +687,6 @@
     "@mantine/utils" "5.10.4"
     react-transition-group "4.4.2"
 
-"@mantine/spotlight@^5.10.4":
-  version "5.10.4"
-  resolved "https://registry.yarnpkg.com/@mantine/spotlight/-/spotlight-5.10.4.tgz#0ec05e5e9868f263e79fc8f30817f4b8f992f492"
-  integrity sha512-gtEVWIPrFHDyGNRx5iKOQMFZiY3BHPAx/vZT3JhWfb+hzA9reMi9UY8s9vpqGOZcLHrvf8YM4IQt6phQkKighA==
-  dependencies:
-    "@mantine/utils" "5.10.4"
-
 "@mantine/styles@5.10.4":
   version "5.10.4"
   resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-5.10.4.tgz#7870f6dff95e709d6af179ae188d31fcfd5c1caf"
