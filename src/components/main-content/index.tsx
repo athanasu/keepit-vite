@@ -12,6 +12,7 @@ export function MainContent() {
   const { data, isLoading, isSuccess, isFetching } = useQuery({
     queryKey: ['translations', { page, limit }],
     queryFn: async () => await fetchTranslations({ page, limit }),
+    staleTime: 300000, // 5 minutes
     keepPreviousData: true,
   })
 
