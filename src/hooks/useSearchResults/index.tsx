@@ -1,10 +1,14 @@
+import { SelectItem } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { searchTranslation } from '~/api/translations'
 import { ApiResponse, Translation } from '~/types'
 import { ZodSearchTranslationData } from '~/zod-parsers'
 
-export const useSelectSearchResults = ({ query, setSearchActionResults }: any) => {
+export const useSearchResults = (query: string) => {
+  const [selectData, setSelectData] = useState<SelectItem[]>([])
+  const [searchResults, setSearchResults] = useState<Translation[]>([])
+
   useEffect(() => {
     const search = async () => {
       if (query.length > 3) {
@@ -15,16 +19,16 @@ export const useSelectSearchResults = ({ query, setSearchActionResults }: any) =
             return
           }
 
-          const parsedResult = ZodSearchTranslationData.parse(data)
+          const parsedResults = ZodSearchTranslationData.parse(data)
+          setSearchResults(parsedResults)
 
-          const actionResults = parsedResult.map((result: Translation) => {
+          const transformedResults = parsedResults.map((result: Translation) => {
             return {
               label: result.from,
-              value: result.to,
+              value: result.id,
             }
           })
-
-          setSearchActionResults(actionResults)
+          setSelectData(transformedResults)
         } catch (error) {
           showNotification({
             title: 'Error',
@@ -35,4 +39,6 @@ export const useSelectSearchResults = ({ query, setSearchActionResults }: any) =
     }
     search()
   }, [query])
+
+  return { selectData, setSelectData, searchResults }
 }

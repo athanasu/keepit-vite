@@ -1,5 +1,5 @@
 export interface Translation {
-  id: number
+  id: string
   createdAt: string
   updatedAt: string
   from: string

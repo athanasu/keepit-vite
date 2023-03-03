@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 const TranslationSchema = z.object({
-  id: z.number(),
+  id: z.number().transform((value) => value.toString()),
   from: z.string(),
   to: z.string(),
   notes: z.string(),
