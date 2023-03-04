@@ -2,7 +2,7 @@ import { Box, Button, Group, TextInput, Textarea } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useFocusTrap } from '@mantine/hooks'
 import { closeAllModals } from '@mantine/modals'
-import { showNotification } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
 import { addTranslation, updateTranslation } from '~/api/translations'
 import { CreateApiResponse, Translation, UpdateApiResponse } from '~/types'
@@ -31,12 +31,12 @@ export function TranslationForm({ item }: { item?: Translation }) {
       await queryClient.invalidateQueries(['translations'])
 
       closeAllModals()
-      showNotification({
+      notifications.show({
         title: 'Information',
         message: `"${data.from}" ${item ? 'updated' : 'stored'} successfully`,
       })
     } catch (error) {
-      showNotification({
+      notifications.show({
         title: 'Error',
         message: JSON.stringify(error),
       })

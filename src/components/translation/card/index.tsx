@@ -1,6 +1,6 @@
 import { Anchor, Badge, Button, Card, Code, Divider, Flex, Group, Text, Title } from '@mantine/core'
 import { openModal } from '@mantine/modals'
-import { showNotification } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { removeTranslation } from '~/api/translations'
@@ -25,12 +25,12 @@ export function TranslationCard({ item }: { item: Translation }) {
       const { data } = (await removeTranslation(item.id)) as DeleteApiResponse
       await queryClient.invalidateQueries(['translations'])
 
-      showNotification({
+      notifications.show({
         title: 'Information',
         message: `"${data.from}" translation removed successfully`,
       })
     } catch (error) {
-      showNotification({
+      notifications.show({
         title: 'Error',
         message: JSON.stringify(error),
       })

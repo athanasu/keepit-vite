@@ -1,5 +1,5 @@
 import { SelectItem } from '@mantine/core'
-import { showNotification } from '@mantine/notifications'
+import { notifications } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { searchTranslation } from '~/api/translations'
 import { ApiResponse, Translation } from '~/types'
@@ -30,7 +30,7 @@ export const useSearchResults = (query: string) => {
           })
           setSelectData(transformedResults)
         } catch (error) {
-          showNotification({
+          notifications.show({
             title: 'Error',
             message: JSON.stringify(error),
           })
