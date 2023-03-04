@@ -1,9 +1,8 @@
 import { Select } from '@mantine/core'
 import { useDebouncedState } from '@mantine/hooks'
 import { openModal } from '@mantine/modals'
+import { TranslationForm } from '~/components/translation/form'
 import { useSearchResults } from '~/hooks/useSearchResults'
-
-import { TranslationForm } from '../translation/form'
 
 export function Search() {
   const [query, setQuery] = useDebouncedState('', 200)

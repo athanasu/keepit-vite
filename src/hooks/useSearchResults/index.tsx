@@ -22,7 +22,7 @@ export const useSearchResults = (query: string) => {
           const parsedResults = ZodSearchTranslationData.parse(data)
           setSearchResults(parsedResults)
 
-          const transformedResults = parsedResults.map((result: Translation) => {
+          const transformedResults: SelectItem[] = parsedResults.map((result: Translation) => {
             return {
               label: result.from,
               value: result.id,
