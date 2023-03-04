@@ -7,7 +7,7 @@ export async function fetchTranslations(payload: FetchPayload) {
   )
 }
 
-export async function removeTranslation(id: number) {
+export async function removeTranslation(id: string) {
   return await fetch(`/.netlify/functions/delete?id=${id}`).then(async (res) => await res.json())
 }
 
@@ -21,7 +21,7 @@ export async function addTranslation(payload: Payload) {
   }).then(async (res) => await res.json())
 }
 
-export async function updateTranslation(id: number, payload: Payload) {
+export async function updateTranslation(id: string, payload: Payload) {
   return await fetch(`/.netlify/functions/update?id=${id}`, {
     method: 'PATCH',
     headers: {

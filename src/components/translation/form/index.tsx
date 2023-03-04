@@ -1,5 +1,6 @@
 import { Box, Button, Group, TextInput, Textarea } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { useFocusTrap } from '@mantine/hooks'
 import { closeAllModals } from '@mantine/modals'
 import { showNotification } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
@@ -8,7 +9,8 @@ import { CreateApiResponse, Translation, UpdateApiResponse } from '~/types'
 
 export function TranslationForm({ item }: { item?: Translation }) {
   const queryClient = useQueryClient()
-
+  const fromInputRef = useFocusTrap()
+  const toInputRef = useFocusTrap()
   const form = useForm({
     initialValues: {
       from: item?.from ?? '',
@@ -44,8 +46,25 @@ export function TranslationForm({ item }: { item?: Translation }) {
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={handleSubmit}>
-        <TextInput withAsterisk label="Original" placeholder="" {...form.getInputProps('from')} disabled={!!item} />
-        <TextInput withAsterisk label="Translation" placeholder="" {...form.getInputProps('to')} />
+        <TextInput
+          ref={fromInputRef}
+          withAsterisk
+          label="Original"
+          placeholder=""
+          {...form.getInputProps('from')}
+          disabled={!!item}
+          data-autofocus={!!item}
+          autoComplete="off"
+        />
+        <TextInput
+          ref={toInputRef}
+          withAsterisk
+          label="Translation"
+          placeholder=""
+          {...form.getInputProps('to')}
+          data-autofocus={!item}
+          autoComplete="off"
+        />
         <Textarea placeholder="Additional information..." label="Notes" {...form.getInputProps('notes')} />
 
         <Group position="right" mt="md">
