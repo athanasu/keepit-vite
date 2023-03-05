@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { removeTranslation } from '~/api/translations'
 import { DeleteIcon, EditIcon, InfoIcon } from '~/components/icons'
+import { EditTransaltionHeader } from '~/components/modal-headers'
 import { TranslationForm } from '~/components/translation/form'
 import { DeleteApiResponse, Translation } from '~/types'
 
@@ -94,7 +95,7 @@ export function TranslationCard({ item }: { item: Translation }) {
         <Button
           onClick={() =>
             openModal({
-              title: 'Edit translation ✍️',
+              title: <EditTransaltionHeader />,
               children: <TranslationForm item={item} />,
             })
           }

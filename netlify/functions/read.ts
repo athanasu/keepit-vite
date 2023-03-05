@@ -4,10 +4,11 @@ const prisma = new PrismaClient()
 
 export async function handler(event) {
   const { page = 1, limit = 50 } = event.queryStringParameters
+  const startIndex = (page - 1) * limit
+  const endIndex = page * limit
+
   try {
     const data = await prisma.keepit_Translation.findMany({ orderBy: { createdAt: 'desc' } })
-    const startIndex = (page - 1) * limit
-    const endIndex = page * limit
     const results = data.slice(startIndex, endIndex)
 
     if (!results.length) {

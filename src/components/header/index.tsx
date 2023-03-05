@@ -1,6 +1,7 @@
 import { ActionIcon, Button, Flex, Group, Header as MantineHeader, MediaQuery, SimpleGrid } from '@mantine/core'
 import { openModal } from '@mantine/modals'
 import { MoonIcon, PlusIcon, SunIcon } from '~/components/icons'
+import { NewTransaltionHeader } from '~/components/modal-headers'
 import { Search } from '~/components/search'
 import { Shortcuts } from '~/components/shortcuts'
 import { TranslationForm } from '~/components/translation/form'
@@ -24,7 +25,7 @@ export function Header() {
                   style={{ fontSize: '1rem', lineHeight: 'normal' }}
                   onClick={() =>
                     openModal({
-                      title: 'New translation ✍️',
+                      title: <NewTransaltionHeader />,
                       children: <TranslationForm />,
                     })
                   }

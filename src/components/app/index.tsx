@@ -4,7 +4,7 @@ import { MainContent } from '~/components/main-content'
 
 function App() {
   return (
-    <AppShell header={<Header />}>
+    <AppShell header={<Header />} style={{ padding: '1rem' }}>
       <MainContent />
     </AppShell>
   )

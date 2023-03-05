@@ -68,7 +68,7 @@ export function TranslationForm({ item }: { item?: Translation }) {
         <Textarea placeholder="Additional information..." label="Notes" {...form.getInputProps('notes')} />
 
         <Group position="right" mt="md">
-          <Button type="submit">{item ? 'Update' : 'Submit'}</Button>
+          <Button type="submit">{item ? 'Save changes' : 'Keep it 💫'}</Button>
         </Group>
       </form>
     </Box>

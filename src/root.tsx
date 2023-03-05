@@ -8,6 +8,7 @@ import '@total-typescript/ts-reset'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from '~/components/app'
+import { NewTransaltionHeader } from '~/components/modal-headers'
 import { TranslationForm } from '~/components/translation/form'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-scheme-context'
 
@@ -32,7 +33,7 @@ function Root() {
       'ctrl+N',
       () =>
         openModal({
-          title: 'New translation ✍️',
+          title: <NewTransaltionHeader />,
           children: <TranslationForm />,
         }),
     ],

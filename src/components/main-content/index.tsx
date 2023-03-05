@@ -27,10 +27,10 @@ export function MainContent() {
           </Badge>
         </MediaQuery>
         <Box style={{ display: 'inline-flex' }}>
-          {isFetching && <Loader size="sm" style={{ marginRight: 10 }} />}
+          {isFetching && <Loader size="sm" style={{ marginRight: 10, marginTop: 8 }} />}
           <Pagination
             total={totalPages}
-            page={currentPage}
+            value={currentPage}
             onChange={(e) => setPage(e)}
             withEdges
             style={{ marginRight: 20 }}
