@@ -1,18 +1,23 @@
 import { Select } from '@mantine/core'
-import { useDebouncedState } from '@mantine/hooks'
+import { useDebouncedState, useHotkeys } from '@mantine/hooks'
 import { openModal } from '@mantine/modals'
+import { useRef } from 'react'
 import { TranslationForm } from '~/components/translation/form'
 import { useSearchResults } from '~/hooks/useSearchResults'
 
 import { EditTransaltionHeader } from '../modal-headers'
 
 export function Search() {
+  const searchRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useDebouncedState('', 200)
   const { selectData, setSelectData, searchResults } = useSearchResults(query)
 
+  useHotkeys([['mod+K', () => searchRef.current?.focus()]])
+
   return (
     <Select
-      placeholder="Search for translations..."
+      rightSection={<></>}
+      placeholder="Looking for something?"
       data={selectData}
       searchable
       onSearchChange={(query) => setQuery(query)}
@@ -24,6 +29,7 @@ export function Search() {
       }
       onDropdownClose={() => setSelectData([])}
       nothingFound="Nothing found..."
+      ref={searchRef}
     />
   )
 }
