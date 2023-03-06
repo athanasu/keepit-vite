@@ -1,7 +1,9 @@
-import { expect, it } from 'vitest'
+import { screen } from '@testing-library/react'
+import { renderWithProviders } from '~/testing'
 
-it('Math.sqrt()', () => {
-  expect(Math.sqrt(4)).toBe(2)
-  expect(Math.sqrt(144)).toBe(12)
-  expect(Math.sqrt(2)).toBe(Math.SQRT2)
+import App from '.'
+
+it('should render <App />', () => {
+  renderWithProviders(<App />)
+  screen.debug()
 })
