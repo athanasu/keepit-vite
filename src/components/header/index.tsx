@@ -12,41 +12,47 @@ export function Header() {
   const dark = colorScheme === 'dark'
 
   return (
-    <MantineHeader height={{ base: 70 }} p="md">
-      <MediaQuery query="(max-width: 750px)" styles={{ justifyContent: 'center' }}>
-        <>
-          <SimpleGrid cols={2} spacing="lg">
-            <Search />
-
-            <Flex align="center" justify="flex-end" direction="row">
-              <Group position="center">
-                <Button
-                  size="xs"
-                  style={{ fontSize: '1rem', lineHeight: 'normal' }}
-                  onClick={() =>
-                    openModal({
-                      title: <NewTransaltionHeader />,
-                      children: <TranslationForm />,
-                    })
-                  }
-                >
-                  <PlusIcon />
-                  &nbsp; New
-                </Button>
-                <ActionIcon
-                  variant="outline"
-                  color={dark ? 'yellow' : 'blue'}
-                  onClick={() => toggleColorScheme()}
-                  title="Toggle color scheme"
-                >
-                  {dark ? <MoonIcon /> : <SunIcon />}
-                </ActionIcon>
-                <Shortcuts />
-              </Group>
-            </Flex>
-          </SimpleGrid>
-        </>
+    <MediaQuery query="(max-width: 750px)" styles={{ justifyContent: 'center' }}>
+      <MediaQuery query="(max-width: 425px)" styles={{ display: 'flex', height: 200, maxHeight: 125 }}>
+        <MantineHeader height={{ base: 70 }} p="md">
+          <MediaQuery
+            query="(max-width: 425px)"
+            styles={{ display: 'flex', flexDirection: 'column-reverse', width: '100%' }}
+          >
+            <SimpleGrid cols={2} spacing="lg">
+              <Search />
+              <MediaQuery query="(max-width: 425px)" styles={{ alignSelf: 'center' }}>
+                <Flex align="center" justify="flex-end" direction="row">
+                  <Group position="center">
+                    <Button
+                      size="xs"
+                      style={{ fontSize: '1rem', lineHeight: 'normal' }}
+                      onClick={() =>
+                        openModal({
+                          title: <NewTransaltionHeader />,
+                          children: <TranslationForm />,
+                        })
+                      }
+                    >
+                      <PlusIcon />
+                      &nbsp; New
+                    </Button>
+                    <ActionIcon
+                      variant="outline"
+                      color={dark ? 'yellow' : 'blue'}
+                      onClick={() => toggleColorScheme()}
+                      title="Toggle color scheme"
+                    >
+                      {dark ? <MoonIcon /> : <SunIcon />}
+                    </ActionIcon>
+                    <Shortcuts />
+                  </Group>
+                </Flex>
+              </MediaQuery>
+            </SimpleGrid>
+          </MediaQuery>
+        </MantineHeader>
       </MediaQuery>
-    </MantineHeader>
+    </MediaQuery>
   )
 }

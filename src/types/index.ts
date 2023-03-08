@@ -35,3 +35,13 @@ export interface Payload {
   to: string
   notes?: string
 }
+
+export interface TranslationForm {
+  item?: Translation
+  from?: string
+}
+
+export type ExclusiveTranslationForm = ({ item: Translation } | { from: string } | Record<string, unknown>) & {
+  item?: Translation
+  from?: string
+}

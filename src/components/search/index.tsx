@@ -1,11 +1,11 @@
-import { Select } from '@mantine/core'
+import { Button, Select } from '@mantine/core'
 import { useDebouncedState, useHotkeys } from '@mantine/hooks'
 import { openModal } from '@mantine/modals'
 import { useRef } from 'react'
 import { TranslationForm } from '~/components/translation/form'
 import { useSearchResults } from '~/hooks/useSearchResults'
 
-import { EditTransaltionHeader } from '../modal-headers'
+import { EditTransaltionHeader, NewTransaltionHeader } from '../modal-headers'
 
 export function Search() {
   const searchRef = useRef<HTMLInputElement>(null)
@@ -28,7 +28,21 @@ export function Search() {
         })
       }
       onDropdownClose={() => setSelectData([])}
-      nothingFound="Nothing found..."
+      nothingFound={
+        query.length > 3 && (
+          <Button
+            style={{ width: '100%', background: 'none' }}
+            onClick={() =>
+              openModal({
+                title: <NewTransaltionHeader />,
+                children: <TranslationForm from={query} />,
+              })
+            }
+          >
+            Nothing found.. Keep it, maybe?
+          </Button>
+        )
+      }
       ref={searchRef}
     />
   )

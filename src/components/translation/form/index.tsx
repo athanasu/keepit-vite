@@ -4,20 +4,17 @@ import { closeAllModals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
 import { addTranslation, updateTranslation } from '~/api/translations'
-import { CreateApiResponse, Translation, UpdateApiResponse } from '~/types'
+import { CreateApiResponse, ExclusiveTranslationForm, UpdateApiResponse } from '~/types'
 
-export function TranslationForm({ item }: { item?: Translation }) {
+import { getInitialFormValues } from './utils'
+
+export function TranslationForm({ item, from }: ExclusiveTranslationForm) {
   const queryClient = useQueryClient()
+
+  const { values, rules } = getInitialFormValues({ item, from })
   const form = useForm({
-    initialValues: {
-      from: item?.from ?? '',
-      to: item?.to ?? '',
-      notes: item?.notes ?? '',
-    },
-    validate: {
-      from: (value) => (value.length < 2 ? 'Must have at least 2 letters' : null),
-      to: (value) => (value.length < 2 ? 'Must have at least 2 letters' : null),
-    },
+    initialValues: values,
+    validate: rules,
   })
 
   const handleSubmit = form.onSubmit(async (values) => {
