@@ -8,7 +8,7 @@ export async function fetchTranslations(payload: FetchPayload) {
 }
 
 export async function removeTranslation(id: string) {
-  return await fetch(`/.netlify/functions/delete?id=${id}`).then(async (res) => await res.json())
+  return await fetch(`/.netlify/functions/delete?id=${id}`, { method: 'DELETE' }).then(async (res) => await res.json())
 }
 
 export async function addTranslation(payload: Payload) {

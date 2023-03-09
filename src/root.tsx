@@ -11,11 +11,16 @@ import App from '~/components/app'
 import { NewTransaltionHeader } from '~/components/modal-headers'
 import { TranslationForm } from '~/components/translation/form'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-scheme-context'
+import { worker } from '~/mocks/browser'
 
 // Create a react query client
 const queryClient = new QueryClient()
 
 function Root() {
+  if (process.env.NODE_ENV === 'development') {
+    worker.start()
+  }
+
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'dark',

@@ -10,7 +10,19 @@ interface RenderWithProvidersOptions {
 }
 
 export const renderWithProviders = (ui: any, options?: RenderWithProvidersOptions) => {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 300000, // 5 minutes
+        retry: false,
+      },
+    },
+    logger: {
+      log: console.log,
+      warn: console.warn,
+      error: () => {},
+    },
+  })
   const colorScheme = options?.colorScheme ?? 'dark'
   const toggleColorScheme = vi.fn()
   const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
