@@ -1,5 +1,6 @@
 import chance from 'chance'
 import { rest } from 'msw'
+import { getUrl } from '~/helpers/get-url'
 
 const length = 50
 const page = 1
@@ -14,7 +15,7 @@ let fakeTranslations = Array.from({ length }, (_, i) => ({
 }))
 
 export const handlers = [
-  rest.get('/.netlify/functions/read', (req, res, ctx) => {
+  rest.get(getUrl('/.netlify/functions/read'), (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -26,7 +27,7 @@ export const handlers = [
       }),
     )
   }),
-  rest.delete('/.netlify/functions/delete', (req, res, ctx) => {
+  rest.delete(getUrl('/.netlify/functions/delete'), (req, res, ctx) => {
     const id = req.url.searchParams.get('id') as string
     const deletedTranslation = fakeTranslations.find((t) => t.id === parseInt(id))
     fakeTranslations = fakeTranslations.filter((t) => t.id !== parseInt(id))
@@ -38,7 +39,7 @@ export const handlers = [
       }),
     )
   }),
-  rest.patch('/.netlify/functions/update', (req, res, ctx) => {
+  rest.patch(getUrl('/.netlify/functions/update'), (req, res, ctx) => {
     const id = req.url.searchParams.get('id') as string
     const { from, to, notes } = req.body as any
     const updateTranslation = fakeTranslations.find((t) => t.id === parseInt(id))
@@ -62,7 +63,7 @@ export const handlers = [
       }),
     )
   }),
-  rest.post('/.netlify/functions/create', (req, res, ctx) => {
+  rest.post(getUrl('/.netlify/functions/create'), (req, res, ctx) => {
     const { from, to, notes } = req.body as any
     const newTranslation = {
       id: fakeTranslations.length + 1,
@@ -83,7 +84,7 @@ export const handlers = [
       }),
     )
   }),
-  rest.get('/.netlify/functions/search', (req, res, ctx) => {
+  rest.get(getUrl('/.netlify/functions/search'), (req, res, ctx) => {
     const q = req.url.searchParams.get('q') as string
     const found = fakeTranslations.find((t) => t.from === q)
 

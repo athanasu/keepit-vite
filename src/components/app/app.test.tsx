@@ -1,9 +1,10 @@
-import { screen } from '@testing-library/react'
+import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { renderWithProviders } from '~/testing'
 
 import App from '.'
 
-it('should render <App />', () => {
+it('should render <App />', async () => {
   renderWithProviders(<App />)
-  screen.debug()
+  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument()
 })

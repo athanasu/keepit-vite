@@ -39,7 +39,7 @@ export function TranslationCard({ item }: { item: Translation }) {
   }
 
   return (
-    <Card shadow="sm" p="lg" radius="md" withBorder key={item.id}>
+    <Card shadow="sm" p="lg" radius="md" withBorder key={item.id} data-testid="card">
       <Group position="apart" mt="md" mb="xs">
         <Badge variant="outline">{item.id}</Badge>
         <Badge color="red" variant="light">
