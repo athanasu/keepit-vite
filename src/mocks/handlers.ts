@@ -83,4 +83,16 @@ export const handlers = [
       }),
     )
   }),
+  rest.get('/.netlify/functions/search', (req, res, ctx) => {
+    const q = req.url.searchParams.get('q') as string
+    const found = fakeTranslations.find((t) => t.from === q)
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        data: [found],
+        statusCode: 200,
+      }),
+    )
+  }),
 ]
