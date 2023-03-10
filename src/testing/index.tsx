@@ -9,7 +9,7 @@ interface RenderWithProvidersOptions {
   colorScheme?: ColorSchemeProviderProps['colorScheme']
 }
 
-export const renderWithProviders = (ui: any, options?: RenderWithProvidersOptions) => {
+export const renderWithProviders = (ui: React.ReactElement, options?: RenderWithProvidersOptions) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -27,15 +27,22 @@ export const renderWithProviders = (ui: any, options?: RenderWithProvidersOption
   const toggleColorScheme = vi.fn()
   const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
 
-  return render(
+  const Wrapper = ({ children }: { children: React.ReactNode }) => (
     <QueryClientProvider client={queryClient}>
       <ColorSchemeMantineProvider {...colorChemeProviderValues}>
         <ColorSchemeProvider {...colorChemeProviderValues}>
           <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-            <ModalsProvider>{ui}</ModalsProvider>
+            <ModalsProvider>{children}</ModalsProvider>
           </MantineProvider>
         </ColorSchemeProvider>
       </ColorSchemeMantineProvider>
-    </QueryClientProvider>,
+    </QueryClientProvider>
   )
+
+  const { rerender, ...result } = render(<Wrapper>{ui}</Wrapper>)
+
+  return {
+    ...result,
+    rerender: (rerenderUi: React.ReactElement) => rerender(<Wrapper>{rerenderUi}</Wrapper>),
+  }
 }
