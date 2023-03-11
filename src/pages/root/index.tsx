@@ -16,8 +16,8 @@ import { worker } from '~/mocks/browser'
 // Create a react query client
 const queryClient = new QueryClient()
 
-// Use Mock Service Worker data when NODE_ENV is set to "msw"
 function Root() {
+  // Use Mock Service Worker data when NODE_ENV is set to "msw"
   if (process.env.NODE_ENV === 'msw') {
     worker.start()
   }

@@ -7,7 +7,7 @@ const page = 1
 
 let fakeTranslations = Array.from({ length }, (_, i) => ({
   id: i + 1,
-  from: chance().word(),
+  from: chance().word({ length: 5 }),
   to: chance().word(),
   notes: chance().paragraph(),
   createdAt: chance().date(),

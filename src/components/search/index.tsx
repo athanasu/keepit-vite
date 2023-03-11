@@ -2,8 +2,8 @@ import { Button, Select } from '@mantine/core'
 import { useDebouncedState, useHotkeys } from '@mantine/hooks'
 import { openModal } from '@mantine/modals'
 import { useRef } from 'react'
+import { useSearchResults } from '~/components/search/hooks/useSearchResults'
 import { TranslationForm } from '~/components/translation/form'
-import { useSearchResults } from '~/hooks/useSearchResults'
 
 import { EditTransaltionHeader, NewTransaltionHeader } from '../modal-headers'
 
