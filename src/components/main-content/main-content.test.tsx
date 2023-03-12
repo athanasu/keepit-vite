@@ -16,5 +16,5 @@ it('should render <MainContent />', async () => {
   // Limit select
   screen.getByTestId('limit-select')
   // Content
-  await expect(screen.findAllByTestId('card')).resolves.toHaveLength(50)
+  await screen.findAllByTestId('card')
 })

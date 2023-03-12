@@ -23,7 +23,6 @@ export function TranslationForm({ item, from }: ExclusiveTranslationForm) {
         ? ((await updateTranslation(item.id, values)) as UpdateApiResponse)
         : ((await addTranslation(values)) as CreateApiResponse)
       await queryClient.invalidateQueries(['translations'])
-
       closeAllModals()
       notifications.show({
         title: 'Information',
@@ -39,7 +38,7 @@ export function TranslationForm({ item, from }: ExclusiveTranslationForm) {
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="translation-form">
         <TextInput
           withAsterisk
           label="Original"

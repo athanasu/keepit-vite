@@ -2,10 +2,10 @@ import { rest } from 'msw'
 import { getTestItem } from '~/helpers/get-test-item'
 import { getUrl } from '~/helpers/get-url'
 
-const length = 50
-const page = 1
+export const LENGTH = 25
+const PAGE = 1
 
-let fakeTranslations = Array.from({ length }, (_, i) => ({
+let fakeTranslations = Array.from({ length: LENGTH }, (_, i) => ({
   ...getTestItem(),
   id: i + 1,
 }))
@@ -19,7 +19,7 @@ export const handlers = [
         statusCode: 200,
         total: fakeTranslations.length,
         totalPages: 1,
-        currentPage: page.toString(),
+        currentPage: PAGE.toString(),
       }),
     )
   }),

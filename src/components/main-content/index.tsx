@@ -23,7 +23,7 @@ export function MainContent() {
       <MediaQuery query="(max-width: 425px)" styles={{ marginTop: 50 }}>
         <Flex justify="space-between" align="center">
           <MediaQuery query="(max-width: 750px)" styles={{ marginBottom: 20 }}>
-            <Badge color="green" variant="light">
+            <Badge color="green" variant="light" data-testid="total">
               Total: {total}
             </Badge>
           </MediaQuery>
