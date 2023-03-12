@@ -9,7 +9,7 @@ interface RenderWithProvidersOptions {
   colorScheme?: ColorSchemeProviderProps['colorScheme']
 }
 
-export const renderWithProviders = (ui: React.ReactElement, options?: RenderWithProvidersOptions) => {
+export const renderWithProviders = (ui: React.ReactElement, options: RenderWithProvidersOptions = {}) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -39,10 +39,10 @@ export const renderWithProviders = (ui: React.ReactElement, options?: RenderWith
     </QueryClientProvider>
   )
 
-  const { rerender, ...result } = render(<Wrapper>{ui}</Wrapper>)
+  const { rerender, ...result } = render(ui, { wrapper: Wrapper, ...options })
 
   return {
     ...result,
-    rerender: (rerenderUi: React.ReactElement) => rerender(<Wrapper>{rerenderUi}</Wrapper>),
+    rerender: (rerenderUi: React.ReactElement) => rerender(<Wrapper {...options}>{rerenderUi}</Wrapper>),
   }
 }

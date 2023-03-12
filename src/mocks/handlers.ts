@@ -1,17 +1,13 @@
-import chance from 'chance'
 import { rest } from 'msw'
+import { getTestItem } from '~/helpers/get-test-item'
 import { getUrl } from '~/helpers/get-url'
 
 const length = 50
 const page = 1
 
 let fakeTranslations = Array.from({ length }, (_, i) => ({
+  ...getTestItem(),
   id: i + 1,
-  from: chance().word({ length: 5 }),
-  to: chance().word(),
-  notes: chance().paragraph(),
-  createdAt: chance().date(),
-  updatedAt: chance().date(),
 }))
 
 export const handlers = [
@@ -66,12 +62,11 @@ export const handlers = [
   rest.post(getUrl('/.netlify/functions/create'), (req, res, ctx) => {
     const { from, to, notes } = req.body as any
     const newTranslation = {
+      ...getTestItem(),
       id: fakeTranslations.length + 1,
       from,
       to,
       notes,
-      createdAt: chance().date(),
-      updatedAt: chance().date(),
     }
 
     fakeTranslations.unshift(newTranslation)

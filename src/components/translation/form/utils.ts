@@ -1,6 +1,6 @@
-import { TranslationForm } from '~/types'
+import { ExclusiveTranslationForm } from '~/types'
 
-export const getInitialFormValues = ({ item, from }: TranslationForm) => {
+export const getInitialFormValues = ({ item, from }: ExclusiveTranslationForm) => {
   const rules = {
     from: (value: string) => (value.length < 2 ? 'Must have at least 2 letters' : null),
     to: (value: string) => (value.length < 2 ? 'Must have at least 2 letters' : null),

@@ -41,8 +41,10 @@ export function TranslationCard({ item }: { item: Translation }) {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder key={item.id} data-testid="card">
       <Group position="apart" mt="md" mb="xs">
-        <Badge variant="outline">{item.id}</Badge>
-        <Badge color="red" variant="light">
+        <Badge variant="outline" data-testid="id">
+          {item.id}
+        </Badge>
+        <Badge color="red" variant="light" data-testid="created-at">
           <Flex direction={{ base: 'column', sm: 'row' }} gap={{ base: 'sm', sm: 'lg' }} justify={{ sm: 'center' }}>
             {createdAt.getDate()}/ {createdAt.getMonth() + 1} / {createdAt.getFullYear()}
           </Flex>

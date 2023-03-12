@@ -35,6 +35,7 @@ export function MainContent() {
               onChange={(e) => setPage(e)}
               withEdges
               style={{ marginRight: 20 }}
+              data-testid="pagination"
             />
             <Select
               size="sm"
@@ -46,6 +47,7 @@ export function MainContent() {
                 { value: '50', label: '50' },
                 { value: '100', label: '100' },
               ]}
+              data-testid="limit-select"
             />
           </Box>
         </Flex>

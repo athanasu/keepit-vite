@@ -3,7 +3,7 @@ import { InfoIcon } from '~/components/icons'
 
 export function Shortcuts() {
   return (
-    <HoverCard width={280} shadow="md">
+    <HoverCard width={280} shadow="md" data-testid="shortcuts">
       <HoverCard.Target>
         <ActionIcon variant="outline" color="blue">
           <InfoIcon />

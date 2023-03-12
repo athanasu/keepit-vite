@@ -19,7 +19,7 @@ export function Header() {
             query="(max-width: 425px)"
             styles={{ display: 'flex', flexDirection: 'column-reverse', width: '100%' }}
           >
-            <SimpleGrid cols={2} spacing="lg">
+            <SimpleGrid cols={2} spacing="lg" data-testid="header">
               <Search />
               <MediaQuery query="(max-width: 425px)" styles={{ alignSelf: 'center' }}>
                 <Flex align="center" justify="flex-end" direction="row">

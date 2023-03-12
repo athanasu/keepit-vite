@@ -10,7 +10,7 @@ import { EditTransaltionHeader, NewTransaltionHeader } from '../modal-headers'
 export function Search() {
   const searchRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useDebouncedState('', 200)
-  const { selectData, setSelectData, searchResults } = useSearchResults(query)
+  const { selectedData, setSelectedData, searchResults } = useSearchResults(query)
 
   useHotkeys([['mod+K', () => searchRef.current?.focus()]])
 
@@ -18,7 +18,7 @@ export function Search() {
     <Select
       rightSection={<></>}
       placeholder="Looking for something?"
-      data={selectData}
+      data={selectedData}
       searchable
       onSearchChange={(query) => setQuery(query)}
       onChange={(sid) =>
@@ -27,7 +27,7 @@ export function Search() {
           children: <TranslationForm item={searchResults.find((i: any) => i.id === sid)} />,
         })
       }
-      onDropdownClose={() => setSelectData([])}
+      onDropdownClose={() => setSelectedData([])}
       nothingFound={
         query.length > 3 && (
           <Button

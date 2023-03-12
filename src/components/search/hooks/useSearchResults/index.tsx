@@ -6,7 +6,7 @@ import { ApiResponse, Translation } from '~/types'
 import { ZodSearchTranslationData } from '~/zod-parsers'
 
 export const useSearchResults = (query: string) => {
-  const [selectData, setSelectData] = useState<SelectItem[]>([])
+  const [selectedData, setSelectedData] = useState<SelectItem[]>([])
   const [searchResults, setSearchResults] = useState<Translation[]>([])
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const useSearchResults = (query: string) => {
               value: result.id,
             }
           })
-          setSelectData(transformedResults)
+          setSelectedData(transformedResults)
         } catch (error) {
           notifications.show({
             title: 'Error',
@@ -40,5 +40,5 @@ export const useSearchResults = (query: string) => {
     search()
   }, [query])
 
-  return { selectData, setSelectData, searchResults }
+  return { selectedData, setSelectedData, searchResults }
 }
