@@ -14,21 +14,21 @@ export const renderWithProviders = (ui: React.ReactElement, options: RenderWithP
   const toggleColorScheme = vi.fn()
   const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
 
-  const Wrapper = ({ children }: { children: React.ReactNode }) => {
-    const queryClient = new QueryClient({
-      queryCache: new QueryCache(),
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
+  const queryClient = new QueryClient({
+    queryCache: new QueryCache(),
+    defaultOptions: {
+      queries: {
+        retry: false,
       },
-      logger: {
-        log: console.log,
-        warn: console.warn,
-        error: () => {},
-      },
-    })
+    },
+    logger: {
+      log: console.log,
+      warn: console.warn,
+      error: () => {},
+    },
+  })
 
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
     return (
       <QueryClientProvider client={queryClient}>
         <ColorSchemeMantineProvider {...colorChemeProviderValues}>
@@ -42,10 +42,12 @@ export const renderWithProviders = (ui: React.ReactElement, options: RenderWithP
     )
   }
 
-  const { rerender, ...result } = render(ui, { wrapper: Wrapper, ...options })
+  const { rerender, unmount, ...result } = render(ui, { wrapper: Wrapper, ...options })
 
   return {
     ...result,
     rerender: (rerenderUi: React.ReactElement) => rerender(<Wrapper {...options}>{rerenderUi}</Wrapper>),
+    unmount,
+    queryClient,
   }
 }

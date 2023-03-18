@@ -1,4 +1,4 @@
-import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
+import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { LENGTH } from '~/mocks/handlers'
 import { renderWithProviders } from '~/testing'
 
@@ -12,3 +12,7 @@ beforeEach(async () => {
 it(`should render <App /> with ${LENGTH} mocked translations`, async () => {
   await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH)
 })
+
+it.todo('should search an item susccessfully')
+
+it.todo('should search an item that does not exist')
