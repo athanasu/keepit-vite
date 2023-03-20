@@ -1,7 +1,7 @@
 import { Button, Select } from '@mantine/core'
 import { useDebouncedState, useHotkeys } from '@mantine/hooks'
 import { openModal } from '@mantine/modals'
-import { useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 import { useSearchResults } from '~/components/search/hooks/useSearchResults'
 import { TranslationForm } from '~/components/translation/form'
 
@@ -31,6 +31,7 @@ export function Search() {
       nothingFound={
         query.length > 3 && (
           <Button
+            data-testid="nothing-found"
             style={{ width: '100%', background: 'none' }}
             onClick={() =>
               openModal({

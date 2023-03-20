@@ -15,7 +15,6 @@ export const renderWithProviders = (ui: React.ReactElement, options: RenderWithP
   const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
 
   const queryClient = new QueryClient({
-    queryCache: new QueryCache(),
     defaultOptions: {
       queries: {
         retry: false,
@@ -42,12 +41,11 @@ export const renderWithProviders = (ui: React.ReactElement, options: RenderWithP
     )
   }
 
-  const { rerender, unmount, ...result } = render(ui, { wrapper: Wrapper, ...options })
+  const { rerender, ...result } = render(ui, { wrapper: Wrapper, ...options })
 
   return {
     ...result,
     rerender: (rerenderUi: React.ReactElement) => rerender(<Wrapper {...options}>{rerenderUi}</Wrapper>),
-    unmount,
     queryClient,
   }
 }
