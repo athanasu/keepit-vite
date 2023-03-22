@@ -11,9 +11,21 @@ const deleteTransaltion = () => {
   userEvent.click(deleteBtn[0])
 }
 
+const slowDeleteTransaltionAction = () => {
+  const deleteBtn = screen.queryAllByRole('button', { name: /delete/i })
+  userEvent.click(deleteBtn[0])
+}
+
 beforeEach(async () => {
   renderWithProviders(<App />)
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
+})
+
+it('should click on delete once and wait until the button returns to original state', async () => {
+  slowDeleteTransaltionAction()
+  await screen.findByText(/click to confirm/i)
+  await waitFor(() => expect(screen.queryByText(/click to confirm/i)).not.toBeInTheDocument())
+  await waitFor(async () => await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH))
 })
 
 it('should delete an entry susccessfully', async () => {
@@ -24,13 +36,3 @@ it('should delete an entry susccessfully', async () => {
   deleteTransaltion()
   await waitFor(async () => await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH - 2))
 })
-
-it.todo('should update an item susccessfully')
-
-it.todo('should search an item susccessfully')
-
-it.todo('should search an item that does not exist')
-
-it.todo('should change limit per page susccessfully')
-
-it.todo('should test non successfull api calls')

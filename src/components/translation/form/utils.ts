@@ -1,18 +1,18 @@
-import { ExclusiveTranslationForm } from '~/types'
+import { ExclusiveTranslationForm, TranslationForm } from '~/types'
 
-export const getInitialFormValues = ({ item, from }: ExclusiveTranslationForm) => {
+export const getInitialFormValues = ({ item, from }: TranslationForm) => {
   const rules = {
     from: (value: string) => (value.length < 2 ? 'Must have at least 2 letters' : null),
     to: (value: string) => (value.length < 2 ? 'Must have at least 2 letters' : null),
   }
 
-  if (!!from && !!item) {
+  if (item) {
     return {
       rules,
       values: {
-        from: '',
-        to: '',
-        notes: '',
+        from: item?.from ?? '',
+        to: item?.to ?? '',
+        notes: item?.notes ?? '',
       },
     }
   }
@@ -31,9 +31,9 @@ export const getInitialFormValues = ({ item, from }: ExclusiveTranslationForm) =
   return {
     rules,
     values: {
-      from: item?.from ?? '',
-      to: item?.to ?? '',
-      notes: item?.notes ?? '',
+      from: '',
+      to: '',
+      notes: '',
     },
   }
 }

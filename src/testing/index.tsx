@@ -7,11 +7,12 @@ import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-s
 
 interface RenderWithProvidersOptions {
   colorScheme?: ColorSchemeProviderProps['colorScheme']
+  toggleColorScheme?: ColorSchemeProviderProps['toggleColorScheme']
 }
 
 export const renderWithProviders = (ui: React.ReactElement, options: RenderWithProvidersOptions = {}) => {
   const colorScheme = options?.colorScheme ?? 'dark'
-  const toggleColorScheme = vi.fn()
+  const toggleColorScheme = options?.toggleColorScheme ?? vi.fn()
   const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
 
   const queryClient = new QueryClient({

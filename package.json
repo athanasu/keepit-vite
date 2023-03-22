@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint ./src --fix",
     "prettier:write": "prettier --write ./src",
-    "test": "DEBUG_PRINT_LIMIT=50000 vitest --watch",
+    "test": "DEBUG_PRINT_LIMIT=20000 vitest --watch",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "coverage": "vitest run --coverage"

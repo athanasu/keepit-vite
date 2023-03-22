@@ -17,7 +17,7 @@ beforeEach(async () => {
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 })
 
-it('should search an item susccessfully', async () => {
+it('should search for an item susccessfully', async () => {
   await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH)
   const translations = client.getQueryData(['translations', { page: 1, limit: '50' }])
   const searchTranslation = (translations as ApiResponse).data[0]
@@ -31,8 +31,7 @@ it('should search an item susccessfully', async () => {
   await screen.findByTestId('translation-form')
 })
 
-// FIXME: act warning
-it('should search an item that does not exist', async () => {
+it("should search for item that doesn't exist", async () => {
   await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH)
   const view = screen.getByTestId('header')
   userEvent.type(within(view).getByRole('searchbox'), 'not found')

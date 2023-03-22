@@ -10,7 +10,7 @@ import { getInitialFormValues } from './utils'
 
 export function TranslationForm({ item, from }: ExclusiveTranslationForm) {
   const queryClient = useQueryClient()
-  // console.log('item', item)
+
   const { values, rules } = getInitialFormValues({ item, from })
   const form = useForm({
     initialValues: values,

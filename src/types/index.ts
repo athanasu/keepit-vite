@@ -36,8 +36,10 @@ export interface Payload {
   notes?: string
 }
 
+export type ItemData = Partial<Translation>
+
 export interface TranslationForm {
-  item?: Translation
+  item?: ItemData
   from?: string
 }
 
