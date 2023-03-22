@@ -32,7 +32,7 @@ it('should call useSearchResults and return statusCode 404', async () => {
   )
 
   const spy = vi.spyOn(translations, 'searchTranslation')
-  const { result } = await waitFor(() => renderHook(() => useSearchResults('test')))
+  await waitFor(() => renderHook(() => useSearchResults('test')))
 
   expect(spy).toHaveReturnedWith({
     data: [],

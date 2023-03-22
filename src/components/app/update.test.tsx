@@ -12,7 +12,7 @@ beforeEach(async () => {
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 })
 
-it('should update an entry susccessfully', async () => {
+it('should update a translation susccessfully', async () => {
   const spy = vi.spyOn(api, 'updateTranslation')
   const updatedTo = 'edited translation'
   const updatedNotes = 'edited notes'

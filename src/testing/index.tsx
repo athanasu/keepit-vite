@@ -1,6 +1,6 @@
 import { ColorSchemeProvider as ColorSchemeMantineProvider, MantineProvider } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
-import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-scheme-context'

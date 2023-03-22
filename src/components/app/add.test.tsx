@@ -12,7 +12,7 @@ beforeEach(async () => {
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 })
 
-it('should create a new entry susccessfully', async () => {
+it('should create a new translation susccessfully', async () => {
   const spy = vi.spyOn(api, 'addTranslation')
   const newFrom = 'original'
   const newTo = 'translation'

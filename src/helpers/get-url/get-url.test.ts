@@ -1,6 +1,7 @@
 import { getUrl } from '.'
 
 const getExpectedResult = () => {
+  // This is needed to run the test successfully in test mode.
   return process.env.NODE_ENV === 'test' ? 'http://localhost:8888/.netlify/functions/read' : '/.netlify/functions/read'
 }
 

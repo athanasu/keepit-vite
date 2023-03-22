@@ -8,16 +8,14 @@ import { ApiResponse } from '~/types'
 import App from '.'
 
 let client: QueryClient
-let selectContainer: HTMLElement
 
 beforeEach(async () => {
-  const { queryClient, container } = renderWithProviders(<App />)
+  const { queryClient } = renderWithProviders(<App />)
   client = queryClient
-  selectContainer = container
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 })
 
-it('should search for an item susccessfully', async () => {
+it('should search for a translation susccessfully', async () => {
   await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH)
   const translations = client.getQueryData(['translations', { page: 1, limit: '50' }])
   const searchTranslation = (translations as ApiResponse).data[0]
@@ -31,7 +29,7 @@ it('should search for an item susccessfully', async () => {
   await screen.findByTestId('translation-form')
 })
 
-it("should search for item that doesn't exist", async () => {
+it("should search for a translation that doesn't exist", async () => {
   await expect(screen.findAllByTestId('card')).resolves.toHaveLength(LENGTH)
   const view = screen.getByTestId('header')
   userEvent.type(within(view).getByRole('searchbox'), 'not found')

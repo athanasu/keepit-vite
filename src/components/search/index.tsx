@@ -1,7 +1,7 @@
 import { Button, Select } from '@mantine/core'
 import { useDebouncedState, useHotkeys } from '@mantine/hooks'
 import { openModal } from '@mantine/modals'
-import { ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 import { useSearchResults } from '~/components/search/hooks/useSearchResults'
 import { TranslationForm } from '~/components/translation/form'
 

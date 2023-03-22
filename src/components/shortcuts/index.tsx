@@ -14,7 +14,7 @@ export function Shortcuts() {
         <br />
         <Badge>New entry</Badge> <Kbd>^</Kbd> + <Kbd>N</Kbd> <br />
         <br />
-        <Badge>Dark / Light</Badge> <Kbd>⌘</Kbd> + <Kbd>J</Kbd>
+        <Badge>Dark / Light</Badge> <Kbd>^</Kbd> + <Kbd>J</Kbd>
       </HoverCard.Dropdown>
     </HoverCard>
   )

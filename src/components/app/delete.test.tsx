@@ -1,9 +1,6 @@
 import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { rest } from 'msw'
-import { getUrl } from '~/helpers/get-url'
 import { LENGTH } from '~/mocks/handlers'
-import { server } from '~/mocks/server'
 import { renderWithProviders } from '~/testing'
 
 import App from '.'

@@ -18,5 +18,3 @@ it('should render <TranslationCard />', () => {
   // notes section
   screen.getByText(/notes:/i)
 })
-
-it.todo('should show notification error')
