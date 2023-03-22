@@ -1,4 +1,4 @@
-import { ExclusiveTranslationForm, TranslationForm } from '~/types'
+import { TranslationForm } from '~/types'
 
 export const getInitialFormValues = ({ item, from }: TranslationForm) => {
   const rules = {

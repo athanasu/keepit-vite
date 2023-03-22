@@ -25,7 +25,6 @@ export function TranslationCard({ item }: { item: Translation }) {
     try {
       const { data } = (await removeTranslation(item.id)) as DeleteApiResponse
       await queryClient.invalidateQueries(['translations'])
-
       notifications.show({
         title: 'Information',
         message: `"${data.from}" translation removed successfully`,
