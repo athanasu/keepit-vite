@@ -25,3 +25,11 @@ export const ZodReadTranslationData = z
     totalPages: 0,
     currentPage: '1',
   })
+
+export const ZodFlashCardsData = z
+  .object({
+    data: TranslationSchemaData,
+  })
+  .default({
+    data: [],
+  })

@@ -7,7 +7,7 @@ import { vi } from 'vitest'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-scheme-context'
 
 interface RenderWithProvidersOptions {
-  route: string
+  route?: string
   colorScheme?: ColorSchemeProviderProps['colorScheme']
   toggleColorScheme?: ColorSchemeProviderProps['toggleColorScheme']
 }

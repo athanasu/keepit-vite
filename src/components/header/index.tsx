@@ -7,6 +7,8 @@ import { Shortcuts } from '~/components/shortcuts'
 import { TranslationForm } from '~/components/translation/form'
 import { ColorSchemeProviderProps, useColorScheme } from '~/context/color-scheme-context'
 
+import { Navigation } from '../navigation'
+
 export function Header() {
   const { colorScheme, toggleColorScheme } = useColorScheme() as ColorSchemeProviderProps
   const dark = colorScheme === 'dark'
@@ -19,7 +21,8 @@ export function Header() {
             query="(max-width: 425px)"
             styles={{ display: 'flex', flexDirection: 'column-reverse', width: '100%' }}
           >
-            <SimpleGrid cols={2} spacing="lg" data-testid="header">
+            <SimpleGrid cols={3} spacing="lg" data-testid="header">
+              <Navigation />
               <Search />
               <MediaQuery query="(max-width: 425px)" styles={{ alignSelf: 'center' }}>
                 <Flex align="center" justify="flex-end" direction="row">
