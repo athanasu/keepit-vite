@@ -7,16 +7,17 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import '@total-typescript/ts-reset'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from '~/components/app'
+import { RouterProvider } from 'react-router-dom'
 import { NewTransaltionHeader } from '~/components/modal-headers'
 import { TranslationForm } from '~/components/translation/form'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-scheme-context'
 import { worker } from '~/mocks/browser'
+import { router } from '~/router'
 
 // Create a react query client
 const queryClient = new QueryClient()
 
-function Root() {
+function RootPage() {
   // Use Mock Service Worker data when NODE_ENV is set to "msw"
   if (process.env.NODE_ENV === 'msw') {
     worker.start()
@@ -55,7 +56,7 @@ function Root() {
             <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
               <ModalsProvider>
                 <Notifications position="top-center" />
-                <App />
+                <RouterProvider router={router} />
               </ModalsProvider>
             </MantineProvider>
           </ColorSchemeProvider>
@@ -66,4 +67,4 @@ function Root() {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<Root />)
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<RootPage />)

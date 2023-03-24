@@ -51,3 +51,8 @@ export type ExclusiveTranslationForm = ({ item: Translation } | { from: string }
 export interface FlashCardPayload {
   limit?: string
 }
+
+export interface RouteError {
+  statusText: number
+  message: string
+}
