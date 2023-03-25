@@ -1,9 +1,16 @@
 import { AppShell } from '@mantine/core'
-import { Outlet, useLocation } from 'react-router-dom'
+import { useHotkeys } from '@mantine/hooks'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Header } from '~/components/header'
 import { MainContent } from '~/components/main-content'
 
 function App() {
+  const navigate = useNavigate()
+  useHotkeys([
+    ['ctrl+H', () => navigate('/')],
+    ['ctrl+F', () => navigate('/flashcards')],
+  ])
+
   const hideRootContent = useLocation().pathname !== '/'
 
   return (

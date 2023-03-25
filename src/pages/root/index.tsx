@@ -32,6 +32,8 @@ function RootPage() {
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value ?? (colorScheme === 'dark' ? 'light' : 'dark'))
 
+  const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
+
   // Use Ctrl+J or Cmd+J to toggle color scheme
   // Use Ctrl+N to create a new translation
   useHotkeys([
@@ -45,8 +47,6 @@ function RootPage() {
         }),
     ],
   ])
-
-  const colorChemeProviderValues: ColorSchemeProviderProps = { colorScheme, toggleColorScheme }
 
   return (
     <React.StrictMode>

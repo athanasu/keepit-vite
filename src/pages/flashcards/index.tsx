@@ -1,4 +1,4 @@
-import { Center, Loader, RingProgress, SimpleGrid, Text } from '@mantine/core'
+import { Button, Center, Loader, RingProgress, SimpleGrid, Text } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchFlashCards } from '~/api/translations'
@@ -9,7 +9,13 @@ import { ZodFlashCardsData } from '~/zod-parsers'
 
 export const FlashcardsPage = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0)
-  console.log(correctAnswers)
+  const [complete, setComplete] = useState(false)
+  const [limit, setLimit] = useState('15')
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ['flashcards', { limit }],
+    queryFn: async () => await fetchFlashCards({ limit }),
+    staleTime: 300000, // 5 minutes
+  })
 
   const setCorrectAnswersWrapper = (value: boolean) => {
     if (value) {
@@ -26,13 +32,6 @@ export const FlashcardsPage = () => {
     setCorrectAnswers: setCorrectAnswersWrapper,
   }
 
-  const [limit, setLimit] = useState('15')
-  const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ['flashcards', { limit }],
-    queryFn: async () => await fetchFlashCards({ limit }),
-    staleTime: 300000, // 5 minutes
-  })
-
   const { data: flashcards } = ZodFlashCardsData.parse(data)
 
   return (
@@ -45,14 +44,19 @@ export const FlashcardsPage = () => {
 
       {isSuccess && (
         <>
-          <RingProgress
-            sections={[{ value: Math.floor((correctAnswers / flashcards.length) * 100), color: 'blue' }]}
-            label={
-              <Text color="blue" weight={700} align="center" size="xl">
-                {Math.floor((correctAnswers / flashcards.length) * 100)}%
-              </Text>
-            }
-          />
+          <Button onClick={() => setComplete(true)} disabled={complete}>
+            {!complete ? 'Complete' : 'Results'}
+          </Button>
+          {complete && (
+            <RingProgress
+              sections={[{ value: Math.floor((correctAnswers / flashcards.length) * 100), color: 'blue' }]}
+              label={
+                <Text color="blue" weight={700} align="center" size="xl">
+                  {Math.floor((correctAnswers / flashcards.length) * 100)}%
+                </Text>
+              }
+            />
+          )}
           <SimpleGrid
             style={{ marginTop: 20, marginBottom: 20 }}
             cols={5}
