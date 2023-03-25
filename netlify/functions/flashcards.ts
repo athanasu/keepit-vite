@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// TODO: REVIEW
 export async function handler(event) {
   const { limit = 10 } = event.queryStringParameters
   let results: [] = []

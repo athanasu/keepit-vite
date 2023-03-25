@@ -1,19 +1,32 @@
-import { Box, Button, Collapse, Group, Text } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { Accordion, Box, Button, Checkbox, Collapse, Group, Text } from '@mantine/core'
+import { useState } from 'react'
+import { useFlashcards } from '~/context/flashcards-context'
 import { Translation } from '~/types'
 
 export const Flashcard = ({ item }: { item: Translation }) => {
-  const [opened, { toggle }] = useDisclosure(false)
+  const [checked, setChecked] = useState(false)
+  const { setCorrectAnswers } = useFlashcards()
 
   return (
-    <Box maw={400} mx="auto">
-      <Group position="center" mb={5}>
-        <Button onClick={toggle}>{item.from}</Button>
-      </Group>
-
-      <Collapse in={opened}>
-        <Text>{item.to}</Text>
-      </Collapse>
+    <Box sx={{ width: '300px', height: '200px', position: 'relative' }} data-testid="flashcard">
+      <Checkbox
+        checked={checked}
+        onChange={(event) => {
+          setChecked(event.currentTarget.checked)
+          setCorrectAnswers(event.currentTarget.checked)
+        }}
+        sx={{ position: 'absolute', top: '14px', '&:hover': { cursor: 'pointer' } }}
+      />
+      <Accordion sx={{ marginLeft: '30px' }}>
+        <Accordion.Item value={item.to}>
+          <Accordion.Control>{item.from}</Accordion.Control>
+          <Accordion.Panel>
+            <Text>{item.to}</Text>
+            <Text>Notes</Text>
+            {item.notes ? <Text>{item.notes}</Text> : '...'}
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
     </Box>
   )
 }
