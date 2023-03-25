@@ -1,4 +1,4 @@
-import { Button, Center, Loader, RingProgress, SimpleGrid, Text } from '@mantine/core'
+import { Button, Center, Loader, RingProgress, Select, SimpleGrid, Text } from '@mantine/core'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchFlashCards } from '~/api/translations'
@@ -61,6 +61,18 @@ export const FlashcardsPage = () => {
               <Progress correctAnswers={correctAnswers} length={flashcards.length} />
             </>
           )}
+          <Select
+            size="sm"
+            style={{ width: 80 }}
+            value={limit}
+            onChange={setLimit}
+            data={[
+              { value: '15', label: '15' },
+              { value: '25', label: '25' },
+              { value: '50', label: '50' },
+            ]}
+            data-testid="flashcards-limit-select"
+          />
           <SimpleGrid
             style={{ marginTop: 20, marginBottom: 20 }}
             cols={5}
