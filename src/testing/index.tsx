@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { vi } from 'vitest'
 import { ColorSchemeProvider, ColorSchemeProviderProps } from '~/context/color-scheme-context'
 
-interface RenderWithProvidersOptions {
+export interface RenderWithProvidersOptions {
   route?: string
   colorScheme?: ColorSchemeProviderProps['colorScheme']
   toggleColorScheme?: ColorSchemeProviderProps['toggleColorScheme']

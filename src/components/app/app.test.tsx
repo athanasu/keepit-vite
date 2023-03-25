@@ -2,14 +2,14 @@ import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/rea
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import { LENGTH } from '~/mocks/handlers'
-import * as testing from '~/testing'
+import { renderWithProviders } from '~/testing'
 
 import App from '.'
 
 const toggleColorSchemeMock = vi.fn()
 
 beforeEach(async () => {
-  testing.renderWithProviders(<App />, { toggleColorScheme: toggleColorSchemeMock })
+  renderWithProviders(<App />, { toggleColorScheme: toggleColorSchemeMock })
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 })
 

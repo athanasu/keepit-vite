@@ -1,11 +1,11 @@
 import { Accordion, Box, Button, Checkbox, Collapse, Group, Text } from '@mantine/core'
 import { useState } from 'react'
-import { useFlashcards } from '~/context/flashcards-context'
+import { FlashcardsProviderProps, useFlashcards } from '~/context/flashcards-context'
 import { Translation } from '~/types'
 
 export const Flashcard = ({ item }: { item: Translation }) => {
   const [checked, setChecked] = useState(false)
-  const { setCorrectAnswers } = useFlashcards()
+  const { setCorrectAnswers } = useFlashcards() as FlashcardsProviderProps
 
   return (
     <Box sx={{ width: '300px', height: '200px', position: 'relative' }} data-testid="flashcard">
@@ -16,6 +16,7 @@ export const Flashcard = ({ item }: { item: Translation }) => {
           setCorrectAnswers(event.currentTarget.checked)
         }}
         sx={{ position: 'absolute', top: '14px', '&:hover': { cursor: 'pointer' } }}
+        data-testid={`flashcard-checkbox-${item.id}`}
       />
       <Accordion sx={{ marginLeft: '30px' }}>
         <Accordion.Item value={item.to}>

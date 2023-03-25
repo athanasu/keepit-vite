@@ -40,7 +40,7 @@ export const FlashcardsPage = () => {
     <>
       {isLoading && (
         <Center style={{ height: '100%' }}>
-          <Loader variant="dots" size={100} style={{ height: '100%' }} />
+          <Loader variant="dots" size={100} style={{ height: '100%' }} data-testid="loader" />
         </Center>
       )}
 

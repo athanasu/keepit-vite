@@ -2,6 +2,7 @@ import { rest } from 'msw'
 import { getTestItem } from '~/helpers/get-test-item'
 import { getUrl } from '~/helpers/get-url'
 
+export const FLASHCARDS_LENGTH = 15
 export const LENGTH = 25
 const PAGE = 1
 
@@ -95,7 +96,7 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: fakeTranslations,
+        data: fakeTranslations.slice(0, FLASHCARDS_LENGTH),
         statusCode: 200,
       }),
     )
