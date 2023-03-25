@@ -91,4 +91,13 @@ export const handlers = [
       }),
     )
   }),
+  rest.get(getUrl('/.netlify/functions/flashcards'), (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        data: fakeTranslations,
+        statusCode: 200,
+      }),
+    )
+  }),
 ]
