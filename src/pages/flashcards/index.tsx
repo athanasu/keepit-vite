@@ -1,13 +1,15 @@
 import { Button, Center, Loader, RingProgress, SimpleGrid, Text } from '@mantine/core'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchFlashCards } from '~/api/translations'
 import { Flashcard } from '~/components/flashcard'
+import { Progress } from '~/components/progress'
 import { FlashcardsProvider, FlashcardsProviderProps } from '~/context/flashcards-context'
 import { Translation } from '~/types'
 import { ZodFlashCardsData } from '~/zod-parsers'
 
 export const FlashcardsPage = () => {
+  const queryClient = useQueryClient()
   const [correctAnswers, setCorrectAnswers] = useState(0)
   const [complete, setComplete] = useState(false)
   const [limit, setLimit] = useState('15')
@@ -44,18 +46,20 @@ export const FlashcardsPage = () => {
 
       {isSuccess && (
         <>
-          <Button onClick={() => setComplete(true)} disabled={complete}>
-            {!complete ? 'Complete' : 'Results'}
-          </Button>
+          {!complete && <Button onClick={() => setComplete(true)}>Complete</Button>}
           {complete && (
-            <RingProgress
-              sections={[{ value: Math.floor((correctAnswers / flashcards.length) * 100), color: 'blue' }]}
-              label={
-                <Text color="blue" weight={700} align="center" size="xl">
-                  {Math.floor((correctAnswers / flashcards.length) * 100)}%
-                </Text>
-              }
-            />
+            <>
+              <Button
+                onClick={async () => {
+                  setComplete(false)
+                  setCorrectAnswers(0)
+                  await queryClient.invalidateQueries(['flashcards'])
+                }}
+              >
+                Restart
+              </Button>
+              <Progress correctAnswers={correctAnswers} length={flashcards.length} />
+            </>
           )}
           <SimpleGrid
             style={{ marginTop: 20, marginBottom: 20 }}
