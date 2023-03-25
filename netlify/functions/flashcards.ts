@@ -4,30 +4,37 @@ const prisma = new PrismaClient()
 
 export async function handler(event) {
   const { limit = 10 } = event.queryStringParameters
-  let results = []
+  let results: [] = []
+  let resultsId: number[] = []
+
+  const getTranslation = async (id) => {
+    const translation = await prisma.keepit_Translation.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return translation
+  }
 
   try {
     const translationsCount = await prisma.keepit_Translation.count()
 
-    // TODO: Convert this to recursive function
-    for (let i = 0; i < limit; i++) {
+    while (results.length < limit) {
       let index = Math.floor(Math.random() * (translationsCount + 1))
-      let randomTranslation = await prisma.keepit_Translation.findUnique({
-        where: {
-          id: index,
-        },
-      })
 
-      // Making sure that we are not getting an id that doesn't exist
-      while (!randomTranslation) {
-        let newIndex = Math.floor(Math.random() * (translationsCount + 1))
-        randomTranslation = await prisma.keepit_Translation.findUnique({
-          where: {
-            id: newIndex,
-          },
-        })
+      if (!resultsId.includes(index)) {
+        resultsId.push(index)
+        let randomTranslation = await getTranslation(index)
+
+        // Making sure that we are not getting an id that doesn't exist
+        while (!randomTranslation) {
+          let newIndex = Math.floor(Math.random() * (translationsCount + 1))
+          randomTranslation = await getTranslation(newIndex)
+        }
+
+        results.push(randomTranslation)
       }
-      results.push(randomTranslation)
     }
 
     return {
