@@ -1,4 +1,4 @@
-import { Accordion, Box, Button, Checkbox, Collapse, Group, Text } from '@mantine/core'
+import { Accordion, Anchor, Box, Button, Checkbox, Code, Collapse, Divider, Group, Text } from '@mantine/core'
 import { useState } from 'react'
 import { FlashcardsProviderProps, useFlashcards } from '~/context/flashcards-context'
 import { Translation } from '~/types'
@@ -8,7 +8,7 @@ export const Flashcard = ({ item }: { item: Translation }) => {
   const { setCorrectAnswers } = useFlashcards() as FlashcardsProviderProps
 
   return (
-    <Box sx={{ width: '300px', height: '200px', position: 'relative' }} data-testid="flashcard">
+    <Box sx={{ maxWidth: '300px', height: '200px', position: 'relative' }} data-testid="flashcard">
       <Checkbox
         checked={checked}
         onChange={(event) => {
@@ -22,9 +22,28 @@ export const Flashcard = ({ item }: { item: Translation }) => {
         <Accordion.Item value={item.to}>
           <Accordion.Control>{item.from}</Accordion.Control>
           <Accordion.Panel>
-            <Text>{item.to}</Text>
-            <Text>Notes</Text>
-            {item.notes ? <Text>{item.notes}</Text> : '...'}
+            <Divider
+              my="xl"
+              label={
+                <Anchor
+                  variant="text"
+                  href={`https://translate.google.com/?sl=en&tl=el&text=${item.from}&op=translate`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.to}
+                </Anchor>
+              }
+              labelPosition="right"
+              labelProps={{
+                variant: 'gradient',
+                gradient: { from: 'indigo', to: 'cyan', deg: 45 },
+                sx: { fontFamily: 'Greycliff CF, sans-serif' },
+                ta: 'center',
+                fz: 'xl',
+                fw: 700,
+              }}
+            />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>

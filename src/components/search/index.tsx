@@ -32,7 +32,7 @@ export function Search() {
         query.length > 3 && (
           <Button
             data-testid="nothing-found"
-            style={{ width: '100%', background: 'none' }}
+            style={{ width: '100%', background: 'none', minWidth: '100px' }}
             onClick={() =>
               openModal({
                 title: <NewTransaltionHeader />,

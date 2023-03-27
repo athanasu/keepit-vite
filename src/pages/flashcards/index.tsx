@@ -1,4 +1,5 @@
-import { Button, Center, Loader, RingProgress, Select, SimpleGrid, Text } from '@mantine/core'
+import { Blockquote, Box, Button, Center, Flex, Loader, Select, SimpleGrid, Text } from '@mantine/core'
+import { closeAllModals, openModal } from '@mantine/modals'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { fetchFlashCards } from '~/api/translations'
@@ -46,50 +47,73 @@ export const FlashcardsPage = () => {
 
       {isSuccess && (
         <>
-          {!complete && <Button onClick={() => setComplete(true)}>Complete</Button>}
-          {complete && (
-            <>
+          <Flex align="end" justify="end">
+            {!complete && (
               <Button
-                onClick={async () => {
-                  setComplete(false)
-                  setCorrectAnswers(0)
-                  await queryClient.invalidateQueries(['flashcards'])
+                onClick={() => {
+                  setComplete(true)
+
+                  openModal({
+                    title: <Blockquote>Let's see how you did..</Blockquote>,
+                    withCloseButton: false,
+                    closeOnClickOutside: false,
+                    centered: true,
+                    children: (
+                      <Flex direction="column" justify={'center'} align={'center'}>
+                        <Progress correctAnswers={correctAnswers} length={flashcards.length} />
+                        <br />
+                        <Button
+                          data-autofocus
+                          sx={{ width: '100%' }}
+                          onClick={async () => {
+                            setComplete(false)
+                            setCorrectAnswers(0)
+                            closeAllModals()
+                            await queryClient.invalidateQueries(['flashcards'])
+                          }}
+                        >
+                          Restart
+                        </Button>
+                      </Flex>
+                    ),
+                  })
                 }}
               >
-                Restart
+                Complete
               </Button>
-              <Progress correctAnswers={correctAnswers} length={flashcards.length} />
-            </>
-          )}
-          <Select
-            size="sm"
-            style={{ width: 80 }}
-            value={limit}
-            onChange={setLimit}
-            data={[
-              { value: '15', label: '15' },
-              { value: '25', label: '25' },
-              { value: '50', label: '50' },
-            ]}
-            data-testid="flashcards-limit-select"
-          />
-          <SimpleGrid
-            style={{ marginTop: 20, marginBottom: 20 }}
-            cols={5}
-            spacing="lg"
-            breakpoints={[
-              { maxWidth: 1450, cols: 4, spacing: 'md' },
-              { maxWidth: 1200, cols: 3, spacing: 'sm' },
-              { maxWidth: 880, cols: 2, spacing: 'sm' },
-              { maxWidth: 450, cols: 1, spacing: 'sm' },
-            ]}
-          >
-            <FlashcardsProvider {...flashcardsProviderValues}>
-              {flashcards.map((item: Translation) => {
-                return <Flashcard item={item} key={item.id} />
-              })}
-            </FlashcardsProvider>
-          </SimpleGrid>
+            )}
+            <Select
+              size="sm"
+              style={{ width: 80 }}
+              value={limit}
+              onChange={setLimit}
+              data={[
+                { value: '15', label: '15' },
+                { value: '25', label: '25' },
+                { value: '50', label: '50' },
+              ]}
+              data-testid="flashcards-limit-select"
+              sx={{ marginLeft: 20 }}
+            />
+          </Flex>
+          <Box sx={{ marginTop: 40 }}>
+            <SimpleGrid
+              style={{ marginTop: 20, marginBottom: 20 }}
+              cols={5}
+              spacing="lg"
+              breakpoints={[
+                { maxWidth: 1450, cols: 3, spacing: 'md' },
+                { maxWidth: 880, cols: 2, spacing: 'sm' },
+                { maxWidth: 450, cols: 1, spacing: 'sm' },
+              ]}
+            >
+              <FlashcardsProvider {...flashcardsProviderValues}>
+                {flashcards.map((item: Translation) => {
+                  return <Flashcard item={item} key={item.id} />
+                })}
+              </FlashcardsProvider>
+            </SimpleGrid>
+          </Box>
         </>
       )}
     </>

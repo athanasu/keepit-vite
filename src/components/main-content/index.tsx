@@ -20,38 +20,36 @@ export function MainContent() {
 
   const TopArea = () => (
     <MediaQuery query="(max-width: 750px)" styles={{ flexDirection: 'column', alignItems: 'center' }}>
-      <MediaQuery query="(max-width: 425px)" styles={{ marginTop: 50 }}>
-        <Flex justify="space-between" align="center">
-          <MediaQuery query="(max-width: 750px)" styles={{ marginBottom: 20 }}>
-            <Badge color="green" variant="light" data-testid="total">
-              Total: {total}
-            </Badge>
-          </MediaQuery>
-          <Box style={{ display: 'inline-flex' }}>
-            {isFetching && <Loader size="sm" style={{ marginRight: 10, marginTop: 8 }} />}
-            <Pagination
-              total={totalPages}
-              value={currentPage}
-              onChange={(e) => setPage(e)}
-              withEdges
-              style={{ marginRight: 20 }}
-              data-testid="pagination"
-            />
-            <Select
-              size="sm"
-              style={{ width: 80 }}
-              value={limit}
-              onChange={setLimit}
-              data={[
-                { value: '25', label: '25' },
-                { value: '50', label: '50' },
-                { value: '100', label: '100' },
-              ]}
-              data-testid="limit-select"
-            />
-          </Box>
-        </Flex>
-      </MediaQuery>
+      <Flex justify="space-between" align="center">
+        <MediaQuery query="(max-width: 750px)" styles={{ marginBottom: 20 }}>
+          <Badge color="green" variant="light" data-testid="total">
+            Total: {total}
+          </Badge>
+        </MediaQuery>
+        <Box style={{ display: 'inline-flex' }}>
+          {isFetching && <Loader size="sm" style={{ marginRight: 10, marginTop: 8 }} />}
+          <Pagination
+            total={totalPages}
+            value={currentPage}
+            onChange={(e) => setPage(e)}
+            withEdges
+            style={{ marginRight: 20 }}
+            data-testid="pagination"
+          />
+          <Select
+            size="sm"
+            style={{ width: 80 }}
+            value={limit}
+            onChange={setLimit}
+            data={[
+              { value: '25', label: '25' },
+              { value: '50', label: '50' },
+              { value: '100', label: '100' },
+            ]}
+            data-testid="limit-select"
+          />
+        </Box>
+      </Flex>
     </MediaQuery>
   )
 
