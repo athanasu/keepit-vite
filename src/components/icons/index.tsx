@@ -63,8 +63,8 @@ export const MoonIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-sun"
-    width="16"
-    height="16"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     strokeWidth="2"
     stroke="currentColor"
@@ -82,8 +82,8 @@ export const SunIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon-tabler icon-tabler-moon-stars"
-    width="16"
-    height="16"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     strokeWidth="2"
     stroke="currentColor"

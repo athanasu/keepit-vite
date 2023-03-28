@@ -5,7 +5,7 @@ export function Shortcuts() {
   return (
     <HoverCard width={280} shadow="md" data-testid="shortcuts">
       <HoverCard.Target>
-        <ActionIcon variant="outline" color="blue">
+        <ActionIcon variant="outline" color="blue" w={35} h={35}>
           <InfoIcon />
         </ActionIcon>
       </HoverCard.Target>

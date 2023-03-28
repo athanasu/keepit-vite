@@ -33,7 +33,6 @@ export function Header() {
                   <Flex align="center" justify="flex-end" direction="row">
                     <Group position="center">
                       <Button
-                        size="xs"
                         style={{ fontSize: '1rem', lineHeight: 'normal' }}
                         onClick={() =>
                           openModal({
@@ -43,9 +42,11 @@ export function Header() {
                         }
                       >
                         <PlusIcon />
-                        &nbsp; New
+                        &nbsp;New
                       </Button>
                       <ActionIcon
+                        w={35}
+                        h={35}
                         variant="outline"
                         color={dark ? 'yellow' : 'blue'}
                         onClick={() => toggleColorScheme()}
