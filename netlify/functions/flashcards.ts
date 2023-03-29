@@ -2,11 +2,10 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// TODO: REVIEW
 export async function handler(event) {
   const { limit = 10 } = event.queryStringParameters
-  let results: [] = []
-  let resultsId: number[] = []
+  let results = []
+  let resultsId = new Set<number>()
 
   const getTranslation = async (id) => {
     const translation = await prisma.keepit_Translation.findUnique({
@@ -22,18 +21,16 @@ export async function handler(event) {
     const translationsCount = await prisma.keepit_Translation.count()
 
     while (results.length < limit) {
-      let index = Math.floor(Math.random() * (translationsCount + 1))
+      const index = Math.floor(Math.random() * translationsCount)
 
-      if (!resultsId.includes(index)) {
-        resultsId.push(index)
-        let randomTranslation = await getTranslation(index)
+      if (resultsId.has(index)) {
+        continue
+      }
 
-        // Making sure that we are not getting an id that doesn't exist
-        while (!randomTranslation) {
-          let newIndex = Math.floor(Math.random() * (translationsCount + 1))
-          randomTranslation = await getTranslation(newIndex)
-        }
+      resultsId.add(index)
+      let randomTranslation = await getTranslation(index)
 
+      if (randomTranslation) {
         results.push(randomTranslation)
       }
     }
