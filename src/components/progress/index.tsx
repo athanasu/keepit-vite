@@ -5,7 +5,7 @@ interface ProgressProps {
   length: number
 }
 
-const getProgressColor = (successPercentage: number) => {
+export const getProgressColor = (successPercentage: number) => {
   if (successPercentage < 50) {
     return 'red'
   } else if (successPercentage < 75) {
