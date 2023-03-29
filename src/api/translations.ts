@@ -38,7 +38,7 @@ export async function searchTranslation(q: string) {
   return await fetch(getUrl(`/.netlify/functions/search?q=${q}`)).then(async (res) => await res.json())
 }
 
-export async function fetchFlashCards(payload: FlashCardPayload) {
+export async function fetchFlashcards(payload: FlashCardPayload) {
   const { limit = '10' } = payload
   return await fetch(getUrl(`/.netlify/functions/flashcards?limit=${parseInt(limit)}`)).then(
     async (res) => await res.json(),

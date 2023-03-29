@@ -2,7 +2,7 @@ import { Blockquote, Box, Button, Center, Flex, Loader, Select, SimpleGrid } fro
 import { closeAllModals, openModal } from '@mantine/modals'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { fetchFlashCards } from '~/api/translations'
+import { fetchFlashcards } from '~/api/translations'
 import { Flashcard } from '~/components/flashcard'
 import { Progress } from '~/components/progress'
 import { FlashcardsProvider, FlashcardsProviderProps } from '~/context/flashcards-context'
@@ -16,7 +16,7 @@ export const FlashcardsPage = () => {
   const [limit, setLimit] = useState('15')
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ['flashcards', { limit }],
-    queryFn: async () => await fetchFlashCards({ limit }),
+    queryFn: async () => await fetchFlashcards({ limit }),
     staleTime: 300000, // 5 minutes
   })
 
