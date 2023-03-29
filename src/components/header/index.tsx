@@ -21,7 +21,7 @@ export function Header() {
           styles={{ display: 'flex', flexDirection: 'column-reverse', width: '100%' }}
         >
           <>
-            <Grid>
+            <Grid data-testid="header">
               <Grid.Col span={'content'}>
                 <Navigation />
               </Grid.Col>
