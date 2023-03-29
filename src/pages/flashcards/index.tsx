@@ -1,4 +1,4 @@
-import { Blockquote, Box, Button, Center, Flex, Loader, Select, SimpleGrid, Text } from '@mantine/core'
+import { Blockquote, Box, Button, Center, Flex, Loader, Select, SimpleGrid } from '@mantine/core'
 import { closeAllModals, openModal } from '@mantine/modals'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'

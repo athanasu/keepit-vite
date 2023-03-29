@@ -1,4 +1,4 @@
-import { Accordion, Anchor, Box, Button, Checkbox, Code, Collapse, Divider, Flex, Group, Text } from '@mantine/core'
+import { Accordion, Anchor, Box, Checkbox, Divider, Flex } from '@mantine/core'
 import { useState } from 'react'
 import { FlashcardsProviderProps, useFlashcards } from '~/context/flashcards-context'
 import { Translation } from '~/types'

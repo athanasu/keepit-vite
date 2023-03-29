@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Flex, Grid, Group, Header as MantineHeader, MediaQuery, SimpleGrid } from '@mantine/core'
+import { ActionIcon, Button, Flex, Grid, Group, Header as MantineHeader, MediaQuery } from '@mantine/core'
 import { openModal } from '@mantine/modals'
 import { MoonIcon, PlusIcon, SunIcon } from '~/components/icons'
 import { NewTransaltionHeader } from '~/components/modal-headers'
