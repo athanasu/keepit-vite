@@ -1,5 +1,5 @@
 import { getUrl } from '~/helpers/get-url'
-import { FetchPayload, FlashCardPayload, Payload } from '~/types'
+import { FetchPayload, FlashcardPayload, Payload } from '~/types'
 
 export async function fetchTranslations(payload: FetchPayload) {
   const { page = 1, limit = '50' } = payload
@@ -38,7 +38,7 @@ export async function searchTranslation(q: string) {
   return await fetch(getUrl(`/.netlify/functions/search?q=${q}`)).then(async (res) => await res.json())
 }
 
-export async function fetchFlashcards(payload: FlashCardPayload) {
+export async function fetchFlashcards(payload: FlashcardPayload) {
   const { limit = '10' } = payload
   return await fetch(getUrl(`/.netlify/functions/flashcards?limit=${parseInt(limit)}`)).then(
     async (res) => await res.json(),

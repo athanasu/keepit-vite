@@ -48,7 +48,7 @@ export type ExclusiveTranslationForm = ({ item: Translation } | { from: string }
   from?: string
 }
 
-export interface FlashCardPayload {
+export interface FlashcardPayload {
   limit?: string
 }
 
