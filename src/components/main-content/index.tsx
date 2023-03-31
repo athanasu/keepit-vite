@@ -40,7 +40,7 @@ export function MainContent() {
             size="sm"
             style={{ width: 80 }}
             value={limit}
-            onChange={setLimit}
+            onChange={(val) => setLimit(val as string)}
             data={[
               { value: '25', label: '25' },
               { value: '50', label: '50' },

@@ -86,7 +86,7 @@ export const FlashcardsPage = () => {
               size="sm"
               style={{ width: 80 }}
               value={limit}
-              onChange={setLimit}
+              onChange={(val) => setLimit(val as string)}
               data={[
                 { value: '15', label: '15' },
                 { value: '25', label: '25' },
