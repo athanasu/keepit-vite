@@ -11,8 +11,9 @@
 Keepit has been my go-to project for testing out different technologies. I have already implemented it using tech stacks such as:
 
 1.  [CRA](https://create-react-app.dev/) + [Laravel](https://laravel.com/) + [Fauna](https://fauna.com/)
-2.  [Laravel + blade templates](https://laravel.com/docs/10.x/blade), [Next.js](https://nextjs.org/)
-3.  [Remix.run](https://remix.run/)
+2.  [Laravel + blade templates](https://laravel.com/docs/10.x/blade)
+3.  [Next.js](https://nextjs.org/)
+4.  [Remix.run](https://remix.run/)
 
 This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https://docs.netlify.com/functions/overview/), [Prisma ORM](https://www.prisma.io/) and [PlanetScale](https://planetscale.com/) to build and maintain the application.
 
