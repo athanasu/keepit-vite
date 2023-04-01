@@ -78,11 +78,24 @@ You can run the application in 2 modes by setting the `VITE_RUN_MSW` value in th
 
 <br />
 
+<!-- Build and Deploy -->
+
+## Build and Deploy
+
+I used [Netlify CLI](https://docs.netlify.com/cli/get-started/) to build and deploy the example app. Steps I followed:
+
+1. `ntl sites:list`
+2. `ntl link`
+3. `ntl env:set VITE_RUN_MSW "true"`
+4. `ntl deploy --prod`
+
+<br />
+
 <!-- DEMO -->
 
 ## Demo
 
-An example of the application in `msw` mode can be found [here](https://example.com).
+An example of the application in `msw` mode can be found [here](https://keepit-vite-demo.netlify.app/).
 
 <br />
 
