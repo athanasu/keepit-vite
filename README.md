@@ -62,7 +62,7 @@ This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https
    COLLATE utf8mb4_unicode_ci;
    ```
 
-6. Update the `.env` file with the `DATABASE_URL` credentials and the `NODE_ENV` of your preference.
+6. Update the `.env` file with the `DATABASE_URL` credentials `NODE_ENV` of your preference or set the `VITE_RUN_MSW` to true to run the mock server.
 7. Run the app: `netlify dev`
 
 <br />
