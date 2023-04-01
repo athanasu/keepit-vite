@@ -71,11 +71,10 @@ This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https
 
 ## Usage
 
-You can run the application in 3 modes by setting the `NODE_ENV` value in the `.env` file:
+You can run the application in 2 modes by setting the `VITE_RUN_MSW` value in the `.env` file:
 
-1. `NODE_ENV=production`: Run in production mode (this also hides the react query devtools)
-2. `NODE_ENV={any}`: Run the local server which connects to the `DATABASE_URL` you specified
-3. `NODE_ENV=msw`: Run the mock server. Even if you haven't completed the PlanetScale setup, the `msw` mode will run the application with mocked data
+1. `VITE_RUN_MSW={any}`: Run the local server which connects to the `DATABASE_URL` you specified
+2. `VITE_RUN_MSW="true"`: Run the mock server. Even if you haven't completed the PlanetScale setup, the `msw` mode will run the application with mocked data
 
 <br />
 

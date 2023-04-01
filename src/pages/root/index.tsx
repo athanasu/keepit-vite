@@ -18,8 +18,8 @@ import { router } from '~/router'
 const queryClient = new QueryClient()
 
 function RootPage() {
-  // Use Mock Service Worker data when NODE_ENV is set to "msw"
-  if (process.env.NODE_ENV === 'msw') {
+  // Use Mock Service Worker data when VITE_RUN_MSW is set to "true"
+  if (import.meta.env.VITE_RUN_MSW === 'true') {
     worker.start()
   }
 
