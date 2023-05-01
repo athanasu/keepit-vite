@@ -29,7 +29,7 @@ export function Search() {
       }
       onDropdownClose={() => setSelectedData([])}
       nothingFound={
-        query.length > 3 && (
+        query.length > 1 && (
           <Button
             data-testid="nothing-found"
             style={{ width: '100%', background: 'none', minWidth: '100px' }}

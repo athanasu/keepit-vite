@@ -11,7 +11,7 @@ export const useSearchResults = (query: string) => {
 
   useEffect(() => {
     const search = async () => {
-      if (query.length > 3) {
+      if (query.length > 1) {
         try {
           const { data, statusCode } = (await searchTranslation(query)) as ApiResponse
 

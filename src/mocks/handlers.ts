@@ -87,7 +87,7 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: [found],
+        data: found ? [found] : [],
         statusCode: 200,
       }),
     )
