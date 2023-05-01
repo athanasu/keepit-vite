@@ -103,6 +103,7 @@ An example of the application in `msw` mode can be found [here](https://keepit-v
 
 ## Roadmap
 
+- [ ] [OpenAI](https://openai.com/) integration for auotmated translations
 - [ ] [Supabase](https://supabase.com/) integration for authentication
 
 <br />
