@@ -25,6 +25,8 @@ This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https
 
 [![Vite][Vite]][Vite-url] [![React][React.js]][React-url] [![Typescript][Typescript]][Typescript-url] [![Zod][Zod]][Zod-url] [![TanStack Query][TanStack Query]][TanStack-url] [![@total-typescript/ts-reset][@total-typescript/ts-reset]][TsReset-url] [![Vitest][Vitest]][Vitest-url] [![ReactRouter][ReactRouter]][ReactRouter-url] [![Mantine][Mantine]][Mantine-url] [![PlanetScale][PlanetScale]][PlanetScale-url] [![Prisma][Prisma]][Prisma-url] [![Netlify][Netlify]][Netlify-url] [![MSW][MSW]][MSW-url]
 
+**Edit**: PlanetScale made the decision to remove the Hobby Tier (more info [here](https://planetscale.com/docs/concepts/hobby-plan-deprecation-faq)), and I decided to migrate my data to SQLite (branch -> [sqlite](https://github.com/athanasu/keepit-vite/tree/sqlite)).
+
 <br />
 
 <!-- GETTING STARTED -->
