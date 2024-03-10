@@ -8,7 +8,7 @@ export async function handler(event) {
   const endIndex = page * limit
 
   try {
-    const data = await prisma.keepit_Translation.findMany({ orderBy: { createdAt: 'desc' } })
+    const data = await prisma.keepit_Translation.findMany({ orderBy: { id: 'desc' } })
     const results = data.slice(startIndex, endIndex)
 
     if (!results.length) {

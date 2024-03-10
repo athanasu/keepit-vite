@@ -15,7 +15,9 @@ Keepit has been my go-to project for testing out different technologies. I have 
 3.  [Next.js](https://nextjs.org/)
 4.  [Remix.run](https://remix.run/)
 
-This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https://docs.netlify.com/functions/overview/), [Prisma ORM](https://www.prisma.io/) and [PlanetScale](https://planetscale.com/) to build and maintain the application.
+This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https://docs.netlify.com/functions/overview/), [Prisma ORM](https://www.prisma.io/) and <s>([PlanetScale](https://planetscale.com/))</s> [SQLite](https://sqlite.com/) to build and maintain the application.
+
+**Edit**: PlanetScale made the decision to remove the Hobby Tier (more info [here](https://planetscale.com/docs/concepts/hobby-plan-deprecation-faq)), and I decided to migrate my data to SQLite.
 
 <br />
 
@@ -23,7 +25,7 @@ This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https
 
 ### Built With
 
-[![Vite][Vite]][Vite-url] [![React][React.js]][React-url] [![Typescript][Typescript]][Typescript-url] [![Zod][Zod]][Zod-url] [![TanStack Query][TanStack Query]][TanStack-url] [![@total-typescript/ts-reset][@total-typescript/ts-reset]][TsReset-url] [![Vitest][Vitest]][Vitest-url] [![ReactRouter][ReactRouter]][ReactRouter-url] [![Mantine][Mantine]][Mantine-url] [![PlanetScale][PlanetScale]][PlanetScale-url] [![Prisma][Prisma]][Prisma-url] [![Netlify][Netlify]][Netlify-url] [![MSW][MSW]][MSW-url]
+[![Vite][Vite]][Vite-url] [![React][React.js]][React-url] [![Typescript][Typescript]][Typescript-url] [![Zod][Zod]][Zod-url] [![TanStack Query][TanStack Query]][TanStack-url] [![@total-typescript/ts-reset][@total-typescript/ts-reset]][TsReset-url] [![Vitest][Vitest]][Vitest-url] [![ReactRouter][ReactRouter]][ReactRouter-url] [![Mantine][Mantine]][Mantine-url] [![SQLite][SQLite]][Sqlite-url] [![Prisma][Prisma]][Prisma-url] [![Netlify][Netlify]][Netlify-url] [![MSW][MSW]][MSW-url]
 
 <br />
 
@@ -46,23 +48,8 @@ This time I wanted to try [Vite](https://vitejs.dev/), [Netlify Functions](https
 2. Move into the folder: `cd ./keepit-vite`
 3. Install packages: `yarn`
 4. Create the .env file: `cp .env-example .env`
-5. Create a PlanetScale account and create the `Keepit_Translation` table:
-
-   ```
-   CREATE TABLE `Keepit_Translation` (
-   	`id` int NOT NULL AUTO_INCREMENT,
-   	`createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-   	`updatedAt` datetime(3) NOT NULL,
-   	`from` varchar(255) NOT NULL,
-   	`to` varchar(255) NOT NULL,
-   	`notes` varchar(255) NOT NULL,
-   	PRIMARY KEY (`id`)
-   ) ENGINE InnoDB,
-   CHARSET utf8mb4,
-   COLLATE utf8mb4_unicode_ci;
-   ```
-
-6. Update the `.env` file with the `DATABASE_URL` credentials `NODE_ENV` of your preference or set the `VITE_RUN_MSW` to true to run the mock server.
+5. Update the `.env` file with the `DATABASE_URL` (sqlite version, [link](https://www.prisma.io/docs/orm/overview/databases/sqlite)), the `NODE_ENV` of your preference or set the `VITE_RUN_MSW` to true to run the mock server
+6. Run `npx prisma migrate dev --name init` to create the sqlite database file to the path you set in the env file
 7. Run the app: `netlify dev`
 
 <br />
@@ -148,8 +135,8 @@ Website: [https://athanasu.com](https://athanasu.com)
 [ReactRouter-url]: https://reactrouter.com/en/main
 [Mantine]: https://img.shields.io/badge/Mantine-fff?style=for-the-badge&logo=css3&logoColor=black
 [Mantine-url]: https://mantine.dev
-[PlanetScale]: https://img.shields.io/badge/PlanetScale-fff?style=for-the-badge&logo=planetscale&logoColor=black
-[PlanetScale-url]: https://planetscale.com/
+[SQLite]: https://img.shields.io/badge/sqlite-fff?style=for-the-badge&logo=sqlite&logoColor=black
+[Sqlite-url]: https://sqlite.com/
 [Prisma]: https://img.shields.io/badge/Prisma-fff?style=for-the-badge&logo=prisma&logoColor=black
 [Prisma-url]: https://www.prisma.io/
 [Netlify]: https://img.shields.io/badge/Netlify-fff?style=for-the-badge&logo=netlify&logoColor=black
