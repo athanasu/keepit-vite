@@ -14,6 +14,10 @@ export default defineConfig({
     },
   },
   plugins: [react(), svgr(), eslintPlugin()],
+  server: {
+    port: 5173,
+    strictPort: true,
+  },
   test: {
     globals: true,
     environment: 'jsdom',

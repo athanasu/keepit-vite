@@ -1,0 +1,12 @@
+[build]
+  command = "yarn build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  command = "yarn dev"
+  framework = "#custom"
+  targetPort = 5173
+  port = 8888
+  publish = "dist"
+  functions = "netlify/functions"
